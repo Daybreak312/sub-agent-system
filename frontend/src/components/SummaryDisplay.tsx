@@ -28,7 +28,7 @@ const StyledSummaryContainer = styled.div`
 const SummaryDisplay: React.FC<SummaryDisplayProps> = ({ summary }) => {
   return (
     <StyledSummaryContainer>
-      <h3>요약:</h3>
+      
       <p>{summary}</p>
     </StyledSummaryContainer>
   );

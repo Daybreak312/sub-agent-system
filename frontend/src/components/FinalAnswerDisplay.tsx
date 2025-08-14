@@ -14,8 +14,6 @@ const StyledFinalAnswerContainer = styled.div`
     background-color: ${props => props.theme.colors.cardBackground};
 
     h3 {
-        margin-top: 0;
-        margin-bottom: ${props => props.theme.spacing.small};
         color: ${props => props.theme.colors.text};
     }
 
@@ -28,7 +26,7 @@ const StyledFinalAnswerContainer = styled.div`
 const FinalAnswerDisplay: React.FC<FinalAnswerDisplayProps> = ({answer}) => {
     return (
         <StyledFinalAnswerContainer>
-            <h3>최종 답변:</h3>
+            
             <ReactMarkdown>{answer}</ReactMarkdown>
         </StyledFinalAnswerContainer>
     );

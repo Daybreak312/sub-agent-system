@@ -32,6 +32,8 @@ const GlobalStyles = createGlobalStyle`
     p {
         font-size: 17px;
         line-height: 1.7;
+        margin: 0;
+        margin-bottom: ${props => props.theme.spacing.small};
     }
 
     a {
@@ -57,9 +59,11 @@ const GlobalStyles = createGlobalStyle`
     }
 
     h1, h2, h3 {
-        line-height: 1; /* 제목의 줄 간격은 본문보다 좁게 */
-        padding-top: 1.5em; /* 폰트 사이즈의 1.5배 */
-        padding-bottom: 0.5em; /* 하단 여백 */
+        line-height: 1.2; /* 제목의 줄 간격은 본문보다 좁게 */
+        
+        /* 폰트 사이즈의 1.5배 */
+        /* 하단 여백 */
+        margin: 1.5em 0 0.5em;
     }
 
     button {

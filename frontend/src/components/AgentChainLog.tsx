@@ -41,7 +41,7 @@ const AgentChainLog: React.FC<AgentChainLogProps> = ({ log, reasoning }) => {
       <StyledToggleHeader 
         onClick={() => setShowLog(prev => !prev)} 
       >
-        <span>에이전트 체인 로그:</span>
+        <span>에이전트 체인 로그</span>
         <span>{showLog ? '▲' : '▼'}</span>
       </StyledToggleHeader>
       {showLog && (

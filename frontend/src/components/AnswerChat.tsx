@@ -25,7 +25,7 @@ const StyledAnswerChatContainer = styled.div`
 const AnswerChat: React.FC<AnswerChatProps> = ({ response }) => {
   return (
     <StyledAnswerChatContainer>
-      <h2>에이전트 응답:</h2>
+      <h2>에이전트 응답</h2>
       
       {response.agent_chain_log && response.agent_chain_log.length > 0 && (
         <AgentChainLog log={response.agent_chain_log} reasoning={response.agent_chain_reasoning} />
