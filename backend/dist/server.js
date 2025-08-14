@@ -4,6 +4,7 @@ import express from 'express';
 import http from 'http';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import cors from 'cors'; // CORS 미들웨어 임포트
 // 우리가 작성한 핵심 에이전트 관리 및 실행 로직을 임포트합니다.
 import { handleUserPrompt, initializeSystem, getSystemStatus, stopAgent } from './main_runner.js';
 import { initializeGeminiClient } from "./gemini_client.js";
@@ -16,6 +17,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 // --- 미들웨어 설정 ---
 app.use(express.json()); // POST 요청의 JSON 본문을 파싱하기 위해 필요합니다.
+app.use(cors({ origin: 'http://localhost:5173' })); // CORS 허용: 프론트엔드 포트 지정
 app.use(express.static(path.join(__dirname, '..', 'frontend', 'dist'))); // 프론트엔드 빌드 파일을 서빙하기 위한 설정
 // --- API 엔드포인트 정의 ---
 // 1. 메인 채팅 API
