@@ -1,0 +1,5 @@
+# This file defines the 'call_fact_checker' tool for the Hub agent.
+# The implementation would call the 'fact_checker_process' MCP server.
+
+name = "call_fact_checker"
+prompt = "Calling the Fact Checker Agent with the text: {{.Args}}"

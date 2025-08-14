@@ -1,0 +1,5 @@
+# This file defines the 'call_safety_guard' tool for the Hub agent.
+# The implementation would call the 'safety_guard_process' MCP server.
+
+name = "call_safety_guard"
+prompt = "Calling the Safety Guard Agent with the text: {{.Args}}"

@@ -1,0 +1,10 @@
+{
+  "name": "safety_guard",
+  "version": "1.0.0",
+  "contextFileName": "safety_guard_context.md",
+  "mcpServers": {
+    "safety_guard_process": {
+      "command": "node safety_guard_server.js"
+    }
+  }
+}

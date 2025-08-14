@@ -1,0 +1,10 @@
+{
+  "name": "fact_checker",
+  "version": "1.0.0",
+  "contextFileName": "fact_checker_context.md",
+  "mcpServers": {
+    "fact_checker_process": {
+      "command": "node fact_checker_server.js"
+    }
+  }
+}

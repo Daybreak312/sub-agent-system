@@ -1,0 +1,10 @@
+{
+  "name": "db_specialist",
+  "version": "1.0.0",
+  "contextFileName": "db_specialist_context.md",
+  "mcpServers": {
+    "db_specialist_process": {
+      "command": "node db_specialist_server.js"
+    }
+  }
+}

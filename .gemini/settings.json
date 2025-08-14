@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "db_specialist": {
+      "command": "node",
+      "args": ["/Users/daybreak312/gemini/agent/sub_agents/db_specialist_server.js"],
+      "timeout": 5000
+    },
+    "fact_checker": {
+      "command": "node",
+      "args": ["/Users/daybreak312/gemini/agent/sub_agents/fact_checker_server.js"],
+      "timeout": 5000
+    },
+    "safety_guard": {
+      "command": "node",
+      "args": ["/Users/daybreak312/gemini/agent/sub_agents/safety_guard_server.js"],
+      "timeout": 5000
+    }
+  }
+}

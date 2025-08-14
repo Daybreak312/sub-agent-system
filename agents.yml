@@ -1,0 +1,41 @@
+# ==================================================
+# Local Agent Weaver - Agent Configuration
+# ==================================================
+# [규칙] 각 에이전트의 컨텍스트 파일은 ./contexts/{id}.md 경로에 위치해야 합니다.
+
+hub:
+  id: "hub_orchestrator"
+  name: "메인 오케스트레이터"
+  description: "사용자의 요청을 받아, 여러 서브 에이전트를 조율하여 최종 답변을 생성하는 지휘관 에이전트."
+  # 허브 에이전트의 기본 실행 전략 (Agent Chain 순서)
+  # 여기에 정의된 순서대로 에이전트 '그룹'을 호출합니다.
+  strategy:
+    - "information_gathering"
+    - "post_processing"
+
+sub_agents:
+  # 정보 수집 단계(information_gathering)에서 사용될 에이전트 그룹
+  - group_id: "information_gathering"
+    group_name: "정보 수집 에이전트"
+    members:
+      - id: "web_searcher"
+        name: "웹 검색 전문가"
+        description: "주어진 주제에 대한 최신 정보를 웹에서 검색합니다."
+        health_check_port: 4001
+      - id: "db_specialist"
+        name: "데이터베이스 전문가"
+        description: "데이터베이스 관련 기본 지식 및 개념에 대해 답변합니다."
+        health_check_port: 4002
+
+  # 후처리 단계(post_processing)에서 사용될 에이전트 그룹
+  - group_id: "post_processing"
+    group_name: "후처리 에이전트"
+    members:
+      - id: "fact_checker"
+        name: "사실 검증 전문가"
+        description: "AI가 생성한 답변 내용의 사실 관계를 확인하고 오류를 수정합니다."
+        health_check_port: 4003
+      - id: "safety_guard"
+        name: "안전성 검토 전문가"
+        description: "AI의 답변 내용에 유해하거나 편향된 내용이 없는지 검토하고 필터링합니다."
+        health_check_port: 4004
