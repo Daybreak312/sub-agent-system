@@ -1,12 +1,11 @@
 // frontend/src/App.tsx
-
 import React, { useState } from 'react';
-import './App.css'; // Assuming default Vite CSS
-import ReactMarkdown from 'react-markdown'; // ReactMarkdown 임포트
+import './App.css';
+import AnswerChat from './components/AnswerChat'; // Import the new component
 
 function App() {
   const [prompt, setPrompt] = useState<string>('');
-  const [response, setResponse] = useState<any>(null); // To store the JSON response
+  const [response, setResponse] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -17,7 +16,7 @@ function App() {
   const handleSubmit = async () => {
     setLoading(true);
     setError(null);
-    setResponse(null); // Clear previous response
+    setResponse(null);
 
     try {
       const res = await fetch('http://localhost:3000/api/prompt', {
@@ -78,44 +77,7 @@ function App() {
       )}
 
       {response && (
-        <div style={{
-          marginTop: '20px',
-          border: '1px solid #eee',
-          padding: '15px',
-          borderRadius: '4px',
-          backgroundColor: '#f9f9f9',
-          width: '70%',
-          margin: '0 auto',
-          textAlign: 'left'
-        }}>
-          <h2>에이전트 응답:</h2>
-          
-          {/* 1. 에이전트 체인 로그 박스 */}
-          {response.agent_chain_log && response.agent_chain_log.length > 0 && (
-            <div style={{ marginBottom: '15px', border: '1px solid #ddd', padding: '10px', borderRadius: '4px', backgroundColor: '#fff' }}>
-              <h3>에이전트 체인 로그:</h3>
-              <pre style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word', backgroundColor: '#e9e9e9', padding: '10px', borderRadius: '4px' }}>
-                {JSON.stringify(response.agent_chain_log, null, 2)}
-              </pre>
-            </div>
-          )}
-
-          {/* 2. 요약 박스 */}
-          {response.final_answer_summary && (
-            <div style={{ marginBottom: '15px', border: '1px solid #ddd', padding: '10px', borderRadius: '4px', backgroundColor: '#fff' }}>
-              <h3>요약:</h3>
-              <p>{response.final_answer_summary}</p>
-            </div>
-          )}
-
-          {/* 3. 최종 답변 박스 */}
-          {response.final_user_answer && (
-            <div style={{ border: '1px solid #ddd', padding: '10px', borderRadius: '4px', backgroundColor: '#fff' }}>
-              <h3>최종 답변:</h3>
-              <ReactMarkdown>{response.final_user_answer}</ReactMarkdown>
-            </div>
-          )}
-        </div>
+        <AnswerChat response={response} /> // Render the new component
       )}
     </div>
   );

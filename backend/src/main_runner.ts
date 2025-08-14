@@ -114,14 +114,14 @@ async function phase1_get_agent_chain_plan(user_prompt: string): Promise<AgentCh
     반드시 아래의 JSON 형식으로 출력해야 합니다.
     
     {
-      "overall_reasoning" : string; // 이 계획을 수립한 전반적인 이유 (클라이언트 표시용)
+      "reasoning" : string; // 이 계획을 수립한 전반적인 이유 (클라이언트 표시용)
       "steps": [
         {
           "step": number; // 실행 순서 (0, 1, 2...), 각 단계는 바로 이전 단계의 결과 전체를 참조 가능
-          "reasoning": string; // 이 단계를 실행하는 이유 (클라이언트 표시용)
           "calls": [
             {
               "agent_id": string; // 호출할 에이전트의 ID
+              "reasoning": string; // 이 에이전트를 호출하는 이유 (클라이언트 표시용)
               "task": string; // 이 에이전트에게 부여된 구체적인 작업 내용
             }
           ]; // 이 단계에서 병렬로 호출될 에이전트 목록
@@ -147,7 +147,7 @@ async function phase2_execute_plan_and_get_final_answer(plan: AgentChainPlan): P
     let last_step_full_output: string = "";
 
     for (const step of plan.steps) {
-        console.log(`[Hub] Step ${step.step} 실행 중... (${step.reasoning})`);
+        console.log(`[Hub] Step ${step.step} 실행 중...`);
         const agent_chain_step_results: AgentResult[] = [];
 
         for (const call of step.calls) {
@@ -164,19 +164,17 @@ async function phase2_execute_plan_and_get_final_answer(plan: AgentChainPlan): P
             const result = await requestToSubAgent(call.agent_id, taskPayload);
             agent_chain_step_results.push(result);
             agent_chain_results.push(result);
+
+            agent_chain_log.push({
+                agent_name: agentRegistry.get(call.agent_id)?.config.name || call.agent_id, // yml에 name이 정의되어 있어야 함
+                reasoning: call.reasoning,
+                summation: result.summation,
+            })
         }
 
-        const step_full_outputs: string[] = [];
-        agent_chain_step_results.forEach((result, index) => {
-            const agentConfig = agentRegistry.get(step.calls[index].agent_id)?.config;
-            agent_chain_log.push({
-                agent_name: agentConfig.id,
-                agent_type: agentConfig.group_id, // yml에 group_id가 정의되어 있어야 함
-                summation: result.summation,
-            });
-            step_full_outputs.push(result.raw);
-        });
-        last_step_full_output = step_full_outputs.join('\n\n---\n\n');
+        last_step_full_output = agent_chain_step_results
+            .map((it) => it.raw)
+            .join('\n\n---\n\n');
     }
 
     console.log('[Hub] 모든 체인 실행 완료. 최종 답변 종합 시작...');
@@ -198,6 +196,7 @@ async function phase2_execute_plan_and_get_final_answer(plan: AgentChainPlan): P
     const final_answer: FinalOutput = JSON.parse(
         await generateText(synthesis_prompt)
     );
+    final_answer.agent_chain_reasoning = plan.reasoning;
     final_answer.agent_chain_log = agent_chain_log;
 
     console.debug(final_answer.agent_chain_log);
