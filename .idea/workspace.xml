@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5c0ae863-ce43-4103-99f7-d27d8e8ab27c" name="Changes" comment="Component">
-      <change beforePath="$PROJECT_DIR$/backend/backend/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/.idea/agent.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/conversation.log" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend/conversation.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/dist/main_runner.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend/dist/main_runner.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/src/main_runner.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend/src/main_runner.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/src/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend/src/types.ts" afterDir="false" />
-    </list>
+    <list default="true" id="5c0ae863-ce43-4103-99f7-d27d8e8ab27c" name="Changes" comment="Component" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -60,6 +51,12 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -74,8 +71,17 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1755175959307</updated>
-      <workItem from="1755175960364" duration="15831000" />
+      <workItem from="1755175960364" duration="18238000" />
     </task>
+    <task id="LOCAL-00001" summary="Component">
+      <option name="closed" value="true" />
+      <created>1755193030415</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1755193030415</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

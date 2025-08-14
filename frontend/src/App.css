@@ -1,38 +1,3 @@
 /* frontend/src/App.css */
 
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: left; /* 모든 텍스트 및 인라인 요소 좌측 정렬 */
-}
-
-/* Vite 기본 템플릿의 다른 스타일 */
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafb);
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
+/* App.tsx의 인라인 스타일이 styled-components로 마이그레이션되었으므로, 이 파일은 비워둡니다. */

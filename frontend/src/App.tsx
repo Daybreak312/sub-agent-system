@@ -1,7 +1,11 @@
 // frontend/src/App.tsx
+
 import React, { useState } from 'react';
-import './App.css';
-import AnswerChat from './components/AnswerChat'; // Import the new component
+import { ThemeProvider } from 'styled-components';
+import GlobalStyles from './styles/GlobalStyles';
+import theme from './styles/theme';
+
+import AnswerChat from './components/AnswerChat';
 
 function App() {
   const [prompt, setPrompt] = useState<string>('');
@@ -43,43 +47,54 @@ function App() {
   };
 
   return (
-    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
-      <h1>Local Agent Weaver</h1>
-      <p>Ask your agent system a question:</p>
+    <ThemeProvider theme={theme}> 
+      <GlobalStyles /> 
+      <div style={{ padding: theme.spacing.large, fontFamily: theme.fonts.body }}> 
+        <h1>Local Agent Weaver</h1>
+        <p>Ask your agent system a question:</p>
 
-      <textarea
-        value={prompt}
-        onChange={handlePromptChange}
-        placeholder="Enter your prompt here..."
-        rows={5}
-        style={{ width: '100%', padding: '10px', marginBottom: '10px', border: '1px solid #ccc', borderRadius: '4px' }}
-      />
-      <button
-        onClick={handleSubmit}
-        disabled={loading}
-        style={{
-          padding: '10px 20px',
-          backgroundColor: '#007bff',
-          color: 'white',
-          border: 'none',
-          borderRadius: '4px',
-          cursor: loading ? 'not-allowed' : 'pointer',
-          opacity: loading ? 0.7 : 1,
-        }}
-      >
-        {loading ? 'Thinking...' : 'Ask Agent'}
-      </button>
+        <textarea
+          value={prompt}
+          onChange={handlePromptChange}
+          placeholder="Enter your prompt here..."
+          rows={5}
+          style={{
+            width: '100%',
+            padding: theme.spacing.small,
+            marginBottom: theme.spacing.small,
+            border: `1px solid ${theme.colors.cardBorder}`,
+            borderRadius: theme.borderRadius.default,
+            backgroundColor: theme.colors.cardBackground, 
+            color: theme.colors.text, 
+          }}
+        />
+        <button
+          onClick={handleSubmit}
+          disabled={loading}
+          style={{
+            padding: `${theme.spacing.small} ${theme.spacing.medium}`,
+            backgroundColor: theme.colors.primary,
+            color: 'white',
+            border: 'none',
+            borderRadius: theme.borderRadius.default,
+            cursor: loading ? 'not-allowed' : 'pointer',
+            opacity: loading ? 0.7 : 1,
+          }}
+        >
+          {loading ? 'Thinking...' : 'Ask Agent'}
+        </button>
 
-      {error && (
-        <div style={{ color: 'red', marginTop: '20px', border: '1px solid red', padding: '10px', borderRadius: '4px' }}>
-          Error: {error}
-        </div>
-      )}
+        {error && (
+          <div style={{ color: theme.colors.error, marginTop: theme.spacing.large, border: `1px solid ${theme.colors.error}`, padding: theme.spacing.small, borderRadius: theme.borderRadius.default }}>
+            Error: {error}
+          </div>
+        )}
 
-      {response && (
-        <AnswerChat response={response} /> // Render the new component
-      )}
-    </div>
+        {response && (
+          <AnswerChat response={response} />
+        )}
+      </div>
+    </ThemeProvider>
   );
 }
 

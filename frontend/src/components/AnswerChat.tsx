@@ -1,8 +1,10 @@
 // frontend/src/components/AnswerChat.tsx
 import React from 'react';
+import styled from 'styled-components';
 import AgentChainLog from './AgentChainLog';
 import SummaryDisplay from './SummaryDisplay';
 import FinalAnswerDisplay from './FinalAnswerDisplay';
+import GlassCard from './GlassCard'; // GlassCard 컴포넌트 임포트
 
 interface AnswerChatProps {
   response: {
@@ -13,19 +15,17 @@ interface AnswerChatProps {
   };
 }
 
+const StyledAnswerChatContainer = styled.div`
+  margin-top: ${props => props.theme.spacing.large};
+  width: 70%;
+  margin: ${props => props.theme.spacing.large} auto;
+  text-align: left;
+`;
+
 const AnswerChat: React.FC<AnswerChatProps> = ({ response }) => {
   return (
-    <div style={{
-      marginTop: '20px',
-      border: '1px solid #eee',
-      padding: '15px',
-      borderRadius: '4px',
-      backgroundColor: '#f9f9f9',
-      width: '70%',
-      margin: '0 auto',
-      textAlign: 'left'
-    }}>
-      <h2>에이전트 응답</h2>
+    <StyledAnswerChatContainer>
+      <h2>에이전트 응답:</h2>
       
       {response.agent_chain_log && response.agent_chain_log.length > 0 && (
         <AgentChainLog log={response.agent_chain_log} reasoning={response.agent_chain_reasoning} />
@@ -38,7 +38,7 @@ const AnswerChat: React.FC<AnswerChatProps> = ({ response }) => {
       {response.final_user_answer && (
         <FinalAnswerDisplay answer={response.final_user_answer} />
       )}
-    </div>
+    </StyledAnswerChatContainer>
   );
 };
 
