@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import './App.css'; // Assuming default Vite CSS
+import ReactMarkdown from 'react-markdown'; // ReactMarkdown 임포트
 
 function App() {
   const [prompt, setPrompt] = useState<string>('');
@@ -33,7 +34,7 @@ function App() {
       }
 
       const data = await res.json();
-      setResponse(data); // Store the full JSON response
+      setResponse(data);
     } catch (err: any) {
       setError(err.message || 'Failed to fetch response.');
       console.error('Frontend API Error:', err);
@@ -77,26 +78,41 @@ function App() {
       )}
 
       {response && (
-        <div style={{ marginTop: '20px', border: '1px solid #eee', padding: '15px', borderRadius: '4px', backgroundColor: '#f9f9f9' }}>
-          <h2>Agent Response:</h2>
-          {response.final_user_answer && (
-            <div>
-              <h3>Final Answer:</h3>
-              <p>{response.final_user_answer}</p>
-            </div>
-          )}
+        <div style={{
+          marginTop: '20px',
+          border: '1px solid #eee',
+          padding: '15px',
+          borderRadius: '4px',
+          backgroundColor: '#f9f9f9',
+          width: '70%',
+          margin: '0 auto',
+          textAlign: 'left'
+        }}>
+          <h2>에이전트 응답:</h2>
+          
+          {/* 1. 에이전트 체인 로그 박스 */}
           {response.agent_chain_log && response.agent_chain_log.length > 0 && (
-            <div>
-              <h3>Agent Chain Log:</h3>
+            <div style={{ marginBottom: '15px', border: '1px solid #ddd', padding: '10px', borderRadius: '4px', backgroundColor: '#fff' }}>
+              <h3>에이전트 체인 로그:</h3>
               <pre style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word', backgroundColor: '#e9e9e9', padding: '10px', borderRadius: '4px' }}>
                 {JSON.stringify(response.agent_chain_log, null, 2)}
               </pre>
             </div>
           )}
+
+          {/* 2. 요약 박스 */}
           {response.final_answer_summary && (
-            <div>
-              <h3>Summary:</h3>
+            <div style={{ marginBottom: '15px', border: '1px solid #ddd', padding: '10px', borderRadius: '4px', backgroundColor: '#fff' }}>
+              <h3>요약:</h3>
               <p>{response.final_answer_summary}</p>
+            </div>
+          )}
+
+          {/* 3. 최종 답변 박스 */}
+          {response.final_user_answer && (
+            <div style={{ border: '1px solid #ddd', padding: '10px', borderRadius: '4px', backgroundColor: '#fff' }}>
+              <h3>최종 답변:</h3>
+              <ReactMarkdown>{response.final_user_answer}</ReactMarkdown>
             </div>
           )}
         </div>
