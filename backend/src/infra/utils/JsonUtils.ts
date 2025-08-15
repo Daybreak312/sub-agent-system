@@ -10,15 +10,14 @@ export class JSONParseError extends Error {
 export const jsonUtils = {
     parse<T>(text: string, context: string): T {
         try {
-            return JSON.parse(text) as T;
+            return JSON.parse(unboxingCodeBlock(text));
         } catch (error) {
-            log.error(`JSON 파싱 실패: ${context}`, 'SYSTEM', {
-                error,
-                rawText: text
-            });
-            log.error(`원본 데이터:\n${text}`, 'SYSTEM');
             throw new JSONParseError(
-                `JSON 파싱 실패 (${context}): ${error instanceof Error ? error.message : 'Unknown error'}`,
+                `JSON 파싱 실패 (${context}): ${error instanceof Error ? error.message : 'Unknown error'}
+                
+                원본 텍스트:
+                ${text}
+                `,
                 text
             );
         }
@@ -37,3 +36,16 @@ export const jsonUtils = {
         }
     }
 };
+
+function unboxingCodeBlock(text: string): string {
+    if (text.startsWith("```jsonUtils") && text.endsWith("```")) {
+        // Remove JSON code block formatting if present
+        return text.slice(8, -3).trim();
+    }
+    if (text.startsWith("```") && text.endsWith("```")) {
+        // Remove code block formatting if present
+        return text.slice(3, -3).trim();
+    }
+
+    return text;
+}
