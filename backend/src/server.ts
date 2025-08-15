@@ -16,14 +16,7 @@ import log from './utils/logger.js';
 // --- 서버 및 앱 초기화 ---
 const app = express();
 const server = http.createServer(app);
-const wss = new WebSocketServer({
-    server,
-    path: '/ws',  // WebSocket 전용 경로 지정
-    verifyClient: (info, cb) => {
-        const isAllowed = info.origin === 'http://localhost:5173';
-        cb(isAllowed, 403, 'Forbidden');
-    }
-});
+const wss = new WebSocketServer({ server });
 const mainRunner = new MainRunner();
 const PORT = process.env.PORT || 3000;
 
@@ -33,41 +26,18 @@ const __dirname = path.dirname(__filename);
 
 // --- WebSocket 연결 관리 ---
 const clients = new Set<WebSocket>();
-const HEARTBEAT_INTERVAL = 30000;
-const CLIENT_TIMEOUT = 35000;
-
-function heartbeat(ws: WebSocket) {
-    (ws as any).isAlive = true;
-}
 
 wss.on('connection', (ws) => {
-    log.info('새로운 WebSocket 연결', 'API');
     clients.add(ws);
+    log.info('새로운 WebSocket 연결', 'API');
 
-    (ws as any).isAlive = true;
-    ws.on('pong', () => heartbeat(ws));
     ws.on('error', (error) => log.error('WebSocket 에러', 'API', { error }));
-
     ws.on('close', () => {
         clients.delete(ws);
         log.info('WebSocket 연결 종료', 'API');
     });
 });
 
-const interval = setInterval(() => {
-    wss.clients.forEach((ws) => {
-        if ((ws as any).isAlive === false) {
-            clients.delete(ws);
-            return ws.terminate();
-        }
-        (ws as any).isAlive = false;
-        ws.ping();
-    });
-}, HEARTBEAT_INTERVAL);
-
-wss.on('close', () => {
-    clearInterval(interval);
-});
 
 function broadcastProgress(data: any) {
     const message = JSON.stringify(data);
