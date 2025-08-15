@@ -1,6 +1,6 @@
-import {AgentInfo, AgentConfig} from './types.js';
+import {AgentInfo, AgentConfig} from '../../domain/agents/types.js';
 import {NotFoundError} from '../errors/AppError.js';
-import log from '../utils/logger.js';
+import log from '../utils/Logger.js';
 
 export class AgentRegistry {
     private agents: Map<string, AgentInfo>;

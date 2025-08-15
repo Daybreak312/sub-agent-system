@@ -1,4 +1,4 @@
-// src/server.ts
+// src/Server.ts
 // 웹 서버를 설정하고 API 엔드포인트를 정의하는 애플리케이션의 메인 진입점입니다.
 
 import express from 'express';
@@ -7,11 +7,11 @@ import path from 'path';
 import {fileURLToPath} from 'url';
 import cors from 'cors';
 import {WebSocket, WebSocketServer} from 'ws';
-import {errorHandler} from './middleware/errorHandler.js';
-import {BadRequestError} from './errors/AppError.js';
-import {initializeGeminiClient} from "./gemini_client.js";
-import {MainRunner} from './agents/MainRunner.js';
-import log from './utils/logger.js';
+import {errorHandler} from '../infra/errors/ErrorHandler.js';
+import {BadRequestError} from '../infra/errors/AppError.js';
+import {initializeGeminiClient} from "../infra/mcp/GeminiClient.js";
+import {MainRunner} from '../domain/agents/MainRunner.js';
+import log from '../infra/utils/Logger.js';
 
 // --- 서버 및 앱 초기화 ---
 const app = express();

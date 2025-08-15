@@ -1,9 +1,9 @@
-import {AgentChainPlan} from '../types.js';
-import {AgentRegistry} from './AgentRegistry.js';
-import {generateText} from '../gemini_client.js';
-import {json} from '../utils/json.js';
-import {getPlanPrompt} from './PromptFatory.js';
-import log from '../utils/logger.js';
+import {AgentChainPlan} from '../../application/types.js';
+import {AgentRegistry} from '../../infra/mcp/AgentRegistry.js';
+import {generateText} from '../../infra/mcp/GeminiClient.js';
+import {jsonUtils} from '../../infra/utils/JsonUtils.js';
+import {getPlanPrompt} from '../../infra/utils/PromptFatory.js';
+import log from '../../infra/utils/Logger.js';
 
 export class ChainPlanner {
     constructor(
@@ -17,7 +17,7 @@ export class ChainPlanner {
 
         const planPrompt = getPlanPrompt(availableAgents, userPrompt);
         const plan_json_string = await generateText(planPrompt);
-        const plan = json.parse<AgentChainPlan>(plan_json_string, '에이전트 체인 계획');
+        const plan = jsonUtils.parse<AgentChainPlan>(plan_json_string, '에이전트 체인 계획');
 
         log.info('Phase 1: 계획 수립 완료', 'SYSTEM', {
             numberOfSteps: plan.steps.length,

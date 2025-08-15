@@ -42,32 +42,32 @@
 /local-agent-weaver/
 ├── backend/                  # 백엔드 애플리케이션
 │   ├── src/
-│   │   ├── server.ts         # API 서버 및 웹 서버 진입점
+│   │   ├── Server.ts         # API 서버 및 웹 서버 진입점
 │   │   ├── main_runner.ts    # 에이전트 관리 및 오케스트레이션 로직 (서비스 계층)
 │   │   ├── sub_agent_process.ts # 서브 에이전트 템플릿
-│   │   ├── gemini_client.ts  # Gemini API 통신 모듈
+│   │   ├── GeminiClient.ts  # Gemini API 통신 모듈
 │   │   └── types.ts          # 공유 타입 정의
 │   ├── agents.yml              # 에이전트 생태계 설정 파일
 │   ├── contexts/               # 각 에이전트의 프롬프트(지침서) 디렉토리
-│   ├── package.json            # 백엔드 의존성 및 스크립트
+│   ├── package.jsonUtils            # 백엔드 의존성 및 스크립트
 │   └── ...
 └── frontend/                 # 프론트엔드 애플리케이션
     ├── src/
     │   ├── App.tsx             # 메인 애플리케이션 컴포넌트
     │   └── components/         # UI 컴포넌트 디렉토리
-    ├── package.json            # 프론트엔드 의존성 및 스크립트
+    ├── package.jsonUtils            # 프론트엔드 의존성 및 스크립트
     └── ...
 ```
 
 ### 컴포넌트 역할
 
-- **`server.ts` (웹 서버 계층):** Express.js 기반의 웹 서버입니다. 프론트엔드로부터 오는 API 요청을 받아, `main_runner.ts`의 함수를 호출하고 그 결과를 반환하는 '정문' 역할을 합니다. 또한 빌드된 프론트엔드의 정적 파일들을 서빙합니다.
+- **`Server.ts` (웹 서버 계층):** Express.js 기반의 웹 서버입니다. 프론트엔드로부터 오는 API 요청을 받아, `main_runner.ts`의 함수를 호출하고 그 결과를 반환하는 '정문' 역할을 합니다. 또한 빌드된 프론트엔드의 정적 파일들을 서빙합니다.
 
-- **`main_runner.ts` (서비스 계층):** 에이전트 시스템의 핵심 로직이 담긴 '엔진룸'입니다. `agents.yml`을 읽어 서브 에이전트 프로세스들을 실행/관리하고, 허브 에이전트의 2단계 실행(계획 수립 -> 결과 종합)을 오케스트레이션하며, `server.ts`에 필요한 함수들을 제공하는 라이브러리 모듈입니다.
+- **`main_runner.ts` (서비스 계층):** 에이전트 시스템의 핵심 로직이 담긴 '엔진룸'입니다. `agents.yml`을 읽어 서브 에이전트 프로세스들을 실행/관리하고, 허브 에이전트의 2단계 실행(계획 수립 -> 결과 종합)을 오케스트레이션하며, `Server.ts`에 필요한 함수들을 제공하는 라이브러리 모듈입니다.
 
 - **`sub_agent_process.ts` (서브 에이전트):** `main_runner.ts`에 의해 `fork`되는 개별 서브 에이전트의 템플릿입니다. 실행 시 자신의 설정 정보를 인자로 받아, 그에 맞는 컨텍스트를 로드하고 허브로부터 작업을 받아 처리한 후 결과를 반환합니다.
 
-- **`gemini_client.ts`:** `@google/genai` SDK를 사용하여 Gemini API와의 모든 통신을 담당하는 중앙 집중형 모듈입니다.
+- **`GeminiClient.ts`:** `@google/genai` SDK를 사용하여 Gemini API와의 모든 통신을 담당하는 중앙 집중형 모듈입니다.
 
 - **`agents.yml`:** 시스템 내 모든 에이전트의 ID, 이름, 설명, 헬스체크 포트 등을 정의하는 중앙 설정 파일입니다.
 

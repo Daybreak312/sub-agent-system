@@ -1,4 +1,4 @@
-import log from './logger.js';
+import log from './Logger.js';
 
 export class JSONParseError extends Error {
     constructor(message: string, public rawData: string) {
@@ -7,7 +7,7 @@ export class JSONParseError extends Error {
     }
 }
 
-export const json = {
+export const jsonUtils = {
     parse<T>(text: string, context: string): T {
         try {
             return JSON.parse(text) as T;

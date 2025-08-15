@@ -1,9 +1,9 @@
-import { AgentTask, AgentResult, AgentChainPlan, FinalOutput, AgentChainLogEntry } from '../types.js';
-import { AgentRegistry } from './AgentRegistry.js';
-import { generateText } from '../gemini_client.js';
-import { json } from '../utils/json.js';
-import { getFinalAnswerPrompt } from './PromptFatory.js';
-import log from '../utils/logger.js';
+import { AgentTask, AgentResult, AgentChainPlan, FinalOutput, AgentChainLogEntry } from '../../application/types.js';
+import { AgentRegistry } from '../../infra/mcp/AgentRegistry.js';
+import { generateText } from '../../infra/mcp/GeminiClient.js';
+import { jsonUtils } from '../../infra/utils/JsonUtils.js';
+import { getFinalAnswerPrompt } from '../../infra/utils/PromptFatory.js';
+import log from '../../infra/utils/Logger.js';
 import { ConversationHistory } from './ConversationHistory.js';
 import EventEmitter from 'events';
 
@@ -145,7 +145,7 @@ export class ChainExecutor {
         log.info('최종 답변 종합 시작...', 'SYSTEM');
 
         const finalPrompt = getFinalAnswerPrompt(userPrompt, results);
-        const finalAnswer = json.parse<FinalOutput>(
+        const finalAnswer = jsonUtils.parse<FinalOutput>(
             await generateText(finalPrompt),
             '최종 답변'
         );

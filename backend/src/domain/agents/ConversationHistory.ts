@@ -1,7 +1,7 @@
 import fs from 'fs';
-import {FinalOutput} from '../types.js';
-import {json} from '../utils/json.js';
-import log from '../utils/logger.js';
+import {FinalOutput} from '../../application/types.js';
+import {jsonUtils} from '../../infra/utils/JsonUtils.js';
+import log from '../../infra/utils/Logger.js';
 
 export class ConversationHistory {
     private history: string = '';
@@ -22,7 +22,7 @@ export class ConversationHistory {
 
         try {
             fs.appendFileSync(this.logFilePath,
-                json.stringify({
+                jsonUtils.stringify({
                     timestamp: new Date().toISOString(),
                     userInput: userPrompt,
                     output

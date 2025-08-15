@@ -4,19 +4,45 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5c0ae863-ce43-4103-99f7-d27d8e8ab27c" name="Changes" comment="Page">
-      <change afterPath="$PROJECT_DIR$/frontend/public/favicon.ico" afterDir="false" />
+    <list default="true" id="5c0ae863-ce43-4103-99f7-d27d8e8ab27c" name="Changes" comment="Add logo.">
+      <change afterPath="$PROJECT_DIR$/backend/src/infra/mcp/AgentsConfig.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/infra/mcp/McpClient.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/infra/utils/PathUtils.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/assets/react.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/AnswerChat.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/AnswerChat.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/EmptyState.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/EmptyState.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/LoadingDots.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/LoadingDots.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/GEMINI.md" beforeDir="false" afterPath="$PROJECT_DIR$/backend/GEMINI.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/backend/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/agents.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/agents.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/agents/AgentRegistry.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/infra/mcp/AgentRegistry.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/agents/ChainExecutor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/domain/agents/ChainExecutor.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/agents/ChainPlanner.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/domain/agents/ChainPlanner.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/agents/ConversationHistory.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/domain/agents/ConversationHistory.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/agents/MainRunner.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/domain/agents/MainRunner.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/agents/PromptFatory.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/infra/utils/PromptFatory.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/agents/SubAgentProcess.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/domain/agents/SubAgentProcess.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/agents/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/domain/agents/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/errors/AppError.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/infra/errors/AppError.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/gemini_client.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/infra/mcp/GeminiClient.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/middleware/errorHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/infra/errors/ErrorHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/application/Server.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/sub_agent_process.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/sub_agent_process.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/application/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/utils/json.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/infra/utils/JsonUtils.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/utils/logger.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/infra/utils/Logger.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/ChatPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/ChatPage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -61,7 +87,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.keymap",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
     "ts.external.directory.path": "/Users/daybreak312/gemini/agent/backend/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
@@ -71,11 +97,11 @@
       <recent name="$PROJECT_DIR$/frontend/public" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/frontend/public" />
-      <recent name="$PROJECT_DIR$/frontend/" />
-      <recent name="$PROJECT_DIR$/frontend/src/assets" />
-      <recent name="$PROJECT_DIR$/backend/src/agents/" />
-      <recent name="$PROJECT_DIR$/backend/src/utils" />
+      <recent name="$PROJECT_DIR$/backend/src/infra/mcp" />
+      <recent name="$PROJECT_DIR$/backend/src/application" />
+      <recent name="$PROJECT_DIR$/backend/src/infra/utils" />
+      <recent name="$PROJECT_DIR$/backend/src/infra" />
+      <recent name="$PROJECT_DIR$/backend/src/domain" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -93,7 +119,7 @@
       <option name="presentableId" value="Default" />
       <updated>1755175959307</updated>
       <workItem from="1755175960364" duration="18238000" />
-      <workItem from="1755196886524" duration="37011000" />
+      <workItem from="1755196886524" duration="44279000" />
     </task>
     <task id="LOCAL-00001" summary="Component">
       <option name="closed" value="true" />
@@ -287,7 +313,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755263544104</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Add logo.">
+      <option name="closed" value="true" />
+      <created>1755271934912</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1755271934912</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -312,6 +346,7 @@
     <MESSAGE value="Socket based agentchain monitoring" />
     <MESSAGE value="Refact socket logic" />
     <MESSAGE value="Page" />
-    <option name="LAST_COMMIT_MESSAGE" value="Page" />
+    <MESSAGE value="Add logo." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add logo." />
   </component>
 </project>

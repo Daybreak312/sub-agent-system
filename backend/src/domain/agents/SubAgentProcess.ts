@@ -2,9 +2,9 @@ import {fork} from 'child_process';
 import path from 'path';
 import {fileURLToPath} from 'url';
 import {AgentConfig, AgentInfo} from './types.js';
-import {AgentRegistry} from './AgentRegistry.js';
-import log from '../utils/logger.js';
-import {json} from '../utils/json.js';
+import {AgentRegistry} from '../../infra/mcp/AgentRegistry.js';
+import log from '../../infra/utils/Logger.js';
+import {jsonUtils} from '../../infra/utils/JsonUtils.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -20,7 +20,7 @@ export class SubAgentProcess {
         log.info(`서브 에이전트 [${agentId}] 시작`, 'AGENT');
 
         const scriptPath = path.join(__dirname, '..', 'sub_agent_process.js');
-        const childProcess = fork(scriptPath, [json.stringify(agentConfig, '에이전트 설정')], {
+        const childProcess = fork(scriptPath, [jsonUtils.stringify(agentConfig, '에이전트 설정')], {
             stdio: ['inherit', 'inherit', 'inherit', 'ipc']
         });
 

@@ -1,9 +1,9 @@
-// src/gemini_client.ts
+// src/GeminiClient.ts
 // Gemini API와의 모든 통신을 담당하는 중앙 클라이언트 모듈입니다.
 
 import {GoogleGenAI} from '@google/genai';
 import dotenv from 'dotenv';
-import log from './utils/logger.js';
+import log from '../utils/Logger.js';
 
 let genAI: GoogleGenAI;
 
@@ -57,7 +57,7 @@ export async function generateText(prompt: string, modelName: string = "gemini-2
             responseLength: text.length
         });
 
-        if (text.startsWith("```json") && text.endsWith("```")) {
+        if (text.startsWith("```jsonUtils") && text.endsWith("```")) {
             // Remove JSON code block formatting if present
             return text.slice(8, -3).trim();
         }

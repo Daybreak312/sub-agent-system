@@ -2,14 +2,14 @@ import yaml from 'js-yaml';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { AgentRegistry } from './AgentRegistry.js';
+import { AgentRegistry } from '../../infra/mcp/AgentRegistry.js';
 import { SubAgentProcess } from './SubAgentProcess.js';
 import { ChainPlanner } from './ChainPlanner.js';
 import { ChainExecutor } from './ChainExecutor.js';
 import { ConversationHistory } from './ConversationHistory.js';
-import { NotFoundError } from '../errors/AppError.js';
-import { FinalOutput } from '../types.js';
-import log from '../utils/logger.js';
+import { NotFoundError } from '../../infra/errors/AppError.js';
+import { FinalOutput } from '../../application/types.js';
+import log from '../../infra/utils/Logger.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

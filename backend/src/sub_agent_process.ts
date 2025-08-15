@@ -3,11 +3,11 @@
 import path from 'path';
 import fs from 'fs';
 import {fileURLToPath} from 'url';
-import {generateText, initializeGeminiClient} from './gemini_client.js';
-import type {AgentTask, AgentResult} from './types.js';
-import {getTaskPrompt} from './agents/PromptFatory.js';
-import log from './utils/logger.js';
-import {json} from './utils/json.js';
+import {generateText, initializeGeminiClient} from './infra/mcp/GeminiClient.js';
+import type {AgentTask, AgentResult} from './application/types.js';
+import {getTaskPrompt} from './infra/utils/PromptFatory.js';
+import log from './infra/utils/Logger.js';
+import {jsonUtils} from './infra/utils/JsonUtils.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -28,7 +28,7 @@ async function handleTask(payload: AgentTask) {
     try {
         const taskPrompt = getTaskPrompt(agentSystemPrompt, new_task, hub_context);
         const llmResponseString = await generateText(taskPrompt);
-        const parsedResponse = json.parse<AgentResult>(llmResponseString, `에이전트 ${agentConfig.id}의 LLM 응답`);
+        const parsedResponse = jsonUtils.parse<AgentResult>(llmResponseString, `에이전트 ${agentConfig.id}의 LLM 응답`);
 
         process.send?.({
             type: 'task_result',
@@ -58,7 +58,7 @@ async function initialize() {
             throw new Error("Agent configuration not provided");
         }
 
-        agentConfig = json.parse(process.argv[2], "에이전트 설정");
+        agentConfig = jsonUtils.parse(process.argv[2], "에이전트 설정");
         const contextFilePath = path.join(__dirname, '..', 'contexts', `${agentConfig.id}.md`);
 
         if (!fs.existsSync(contextFilePath)) {
