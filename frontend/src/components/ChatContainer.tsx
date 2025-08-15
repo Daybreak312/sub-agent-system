@@ -30,9 +30,8 @@ const Container = styled.div`
 const ScrollableArea = styled.div`
   flex: 1;
   overflow-y: auto;
-  padding: 0 12px;
-  margin-bottom: 100px;
-  
+  padding: 0 12px 100px;
+
   &::-webkit-scrollbar {
     width: 6px;
     background: transparent;
@@ -41,7 +40,7 @@ const ScrollableArea = styled.div`
   &::-webkit-scrollbar-thumb {
     background: ${props => props.theme.colors.primary}22;
     border-radius: 3px;
-    
+
     &:hover {
       background: ${props => props.theme.colors.primary}44;
     }

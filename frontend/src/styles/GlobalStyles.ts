@@ -17,6 +17,12 @@ const GlobalStyles = createGlobalStyle`
         -moz-osx-font-smoothing: grayscale;
     }
 
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
     body {
         margin: 0;
         display: flex;
@@ -25,8 +31,11 @@ const GlobalStyles = createGlobalStyle`
         justify-content: flex-start;
         min-width: 320px;
         min-height: 100vh;
-        background-color: ${props => props.theme.colors.background};
+        background: ${props => props.theme.colors.background};
         color: ${props => props.theme.colors.text};
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
 
     p {

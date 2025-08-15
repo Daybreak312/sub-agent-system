@@ -4,16 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5c0ae863-ce43-4103-99f7-d27d8e8ab27c" name="Changes" comment="Create ChatContainer.tsx">
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/LoadingDots.tsx" afterDir="false" />
+    <list default="true" id="5c0ae863-ce43-4103-99f7-d27d8e8ab27c" name="Changes" comment="Editing Chatting UI">
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/VerticalLineContainer.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/styles/MarkdownStyles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/styles/styled.d.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/conversation.log" beforeDir="false" afterPath="$PROJECT_DIR$/backend/conversation.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/AgentChainLog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/AgentChainLog.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/AgentLogEntry.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/AgentLogEntry.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/AnswerChat.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/AnswerChat.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/ChatContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/ChatContainer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/FinalAnswerDisplay.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/FinalAnswerDisplay.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/PromptInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/PromptInput.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/SummaryDisplay.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/SummaryDisplay.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/styles/GlobalStyles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/styles/GlobalStyles.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/styles/theme.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/styles/theme.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +91,7 @@
       <option name="presentableId" value="Default" />
       <updated>1755175959307</updated>
       <workItem from="1755175960364" duration="18238000" />
-      <workItem from="1755196886524" duration="6692000" />
+      <workItem from="1755196886524" duration="9852000" />
     </task>
     <task id="LOCAL-00001" summary="Component">
       <option name="closed" value="true" />
@@ -136,7 +141,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755234155156</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Editing Chatting UI">
+      <option name="closed" value="true" />
+      <created>1755235625852</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1755235625852</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -151,6 +164,7 @@
     <MESSAGE value="UI refact." />
     <MESSAGE value="Update input component" />
     <MESSAGE value="Create ChatContainer.tsx" />
-    <option name="LAST_COMMIT_MESSAGE" value="Create ChatContainer.tsx" />
+    <MESSAGE value="Editing Chatting UI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Editing Chatting UI" />
   </component>
 </project>

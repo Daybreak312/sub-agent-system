@@ -2,6 +2,7 @@
 
 const theme = {
     colors: {
+        secondary: '#6c757d',
         background: '#1a1a1a', // 바디 배경색
         rootBackground: '#242424', // 루트 요소 배경색
         text: 'rgba(255, 255, 255, 0.87)', // 기본 텍스트 색상
