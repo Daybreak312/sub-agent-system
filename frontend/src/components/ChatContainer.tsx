@@ -2,6 +2,7 @@ import React, {useEffect, useRef} from 'react';
 import styled from 'styled-components';
 import {UserMessage} from './UserMessage';
 import {AnswerChat} from './AnswerChat';
+import {EmptyState} from './EmptyState';
 
 interface Message {
     type: 'user' | 'agent';
@@ -107,28 +108,32 @@ export const ChatContainer: React.FC<ChatContainerProps> = ({messages}) => {
     return (
         <Container>
             <ScrollableArea ref={scrollRef}>
-                <MessagesContainer>
-                    {messages.map((message, index) => {
-                        const key = `${message.type}-${message.timestamp.getTime()}-${index}`;
-                        return (
-                            <MessageWrapper
-                                key={key}
-                                data-message-key={key}
-                                data-entering="true"
-                                isUser={message.type === 'user'}
-                            >
-                                {message.type === 'user' ? (
-                                    <UserMessage content={message.content}/>
-                                ) : (
-                                    <AnswerChat
-                                        response={message.content}
-                                        isLoading={message.isLoading}
-                                    />
-                                )}
-                            </MessageWrapper>
-                        );
-                    })}
-                </MessagesContainer>
+                {messages.length === 0 ? (
+                    <EmptyState />
+                ) : (
+                    <MessagesContainer>
+                        {messages.map((message, index) => {
+                            const key = `${message.type}-${message.timestamp.getTime()}-${index}`;
+                            return (
+                                <MessageWrapper
+                                    key={key}
+                                    data-message-key={key}
+                                    data-entering="true"
+                                    isUser={message.type === 'user'}
+                                >
+                                    {message.type === 'user' ? (
+                                        <UserMessage content={message.content}/>
+                                    ) : (
+                                        <AnswerChat
+                                            response={message.content}
+                                            isLoading={message.isLoading}
+                                        />
+                                    )}
+                                </MessageWrapper>
+                            );
+                        })}
+                    </MessagesContainer>
+                )}
             </ScrollableArea>
         </Container>
     );

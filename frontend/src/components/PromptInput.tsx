@@ -25,9 +25,7 @@ const FixedContainer = styled.div`
 
 const InputContainer = styled(GlassCard)`
     flex: 1;
-    backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     padding: 18px;
     transition: all 0.3s ease;
     display: flex;

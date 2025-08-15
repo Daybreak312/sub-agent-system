@@ -6,6 +6,7 @@ import GlobalStyles from './styles/GlobalStyles';
 import theme from './styles/theme';
 import {PromptInput} from './components/PromptInput';
 import {ChatContainer} from './components/ChatContainer';
+import LiquidGlass from "liquid-glass-react";
 
 interface Message {
     type: 'user' | 'agent';
