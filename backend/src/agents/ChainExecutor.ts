@@ -5,35 +5,69 @@ import { json } from '../utils/json.js';
 import { getFinalAnswerPrompt } from './PromptFatory.js';
 import log from '../utils/logger.js';
 import { ConversationHistory } from './ConversationHistory.js';
+import EventEmitter from 'events';
 
 export class ChainExecutor {
+    private eventEmitter: EventEmitter;
+
     constructor(
         private agentRegistry: AgentRegistry,
         private history: ConversationHistory
-    ) {}
+    ) {
+        this.eventEmitter = new EventEmitter();
+    }
+
+    onProgressUpdate(callback: (output: FinalOutput) => void) {
+        this.eventEmitter.on('progress', callback);
+    }
+
+    private emitProgress(output: FinalOutput) {
+        this.eventEmitter.emit('progress', output);
+    }
 
     async execute(userPrompt: string, plan: AgentChainPlan): Promise<FinalOutput> {
         log.info('Phase 2: 에이전트 체인 실행 시작...', 'SYSTEM');
+
+        // 초기 상태 생성 - 모든 에이전트의 기본 정보를 포함
+        const initialLogs = plan.steps.flatMap(step =>
+            step.calls.map(call => ({
+                agent_name: this.agentRegistry.get(call.agent_id).config.name,
+                reasoning: call.reasoning,
+                summation: ''  // 실행 전이므로 빈 문자열
+            }))
+        );
+
+        const output: FinalOutput = {
+            agent_chain_reasoning: plan.reasoning,
+            agent_chain_log: initialLogs,
+            is_complete: false
+        };
+        this.emitProgress(output);
+
         const agentChainResults: AgentResult[] = [];
-        const agentChainLog: AgentChainLogEntry[] = [];
         let lastStepFullOutput: string = "";
 
         // 각 단계별 실행
         for (const step of plan.steps) {
-            const stepResults = await this.executeStep(step, lastStepFullOutput, agentChainLog);
+            const stepResults = await this.executeStep(step, lastStepFullOutput, output.agent_chain_log);
             agentChainResults.push(...stepResults);
             lastStepFullOutput = stepResults.map(r => r.raw).join('\n\n---\n\n');
+            this.emitProgress(output);
         }
 
         // 최종 답변 생성
         const finalAnswer = await this.generateFinalAnswer(userPrompt, agentChainResults);
-        finalAnswer.agent_chain_reasoning = plan.reasoning;
-        finalAnswer.agent_chain_log = agentChainLog;
+
+        // 최종 결과 업데이트
+        output.final_user_answer = finalAnswer.final_user_answer;
+        output.final_answer_summary = finalAnswer.final_answer_summary;
+        output.is_complete = true;
+        this.emitProgress(output);
 
         // 대화 이력 업데이트
-        this.history.updateHistory(userPrompt, finalAnswer);
+        this.history.updateHistory(userPrompt, output);
 
-        return finalAnswer;
+        return output;
     }
 
     private async executeStep(
@@ -42,18 +76,21 @@ export class ChainExecutor {
         agentChainLog: AgentChainLogEntry[]
     ): Promise<AgentResult[]> {
         log.info(`Step ${step.step} 실행`, 'SYSTEM');
-
         const results: AgentResult[] = [];
 
         for (const call of step.calls) {
             const result = await this.executeAgentCall(call, step.requires_context, previousOutput);
             results.push(result);
 
-            agentChainLog.push({
-                agent_name: this.agentRegistry.get(call.agent_id).config.name,
-                reasoning: call.reasoning,
-                summation: result.summation,
-            });
+            // agent_chain_log에서 해당 에이전트의 summation을 업데이트
+            const agentLogIndex = agentChainLog.findIndex(log =>
+                log.agent_name === this.agentRegistry.get(call.agent_id).config.name
+                && log.reasoning === call.reasoning
+            );
+
+            if (agentLogIndex !== -1) {
+                agentChainLog[agentLogIndex].summation = result.summation;
+            }
         }
 
         return results;

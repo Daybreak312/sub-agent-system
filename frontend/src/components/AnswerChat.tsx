@@ -4,8 +4,9 @@ import styled from 'styled-components';
 import {LoadingDots} from './LoadingDots';
 import {AgentChainLog} from './AgentChainLog';
 import {SummaryDisplay} from './SummaryDisplay';
-import FinalAnswerDisplay from './FinalAnswerDisplay';
+import {useWebSocket} from '../hooks/useWebSocket';
 import reactLogo from '../assets/react.svg';
+import FinalAnswerDisplay from "./FinalAnswerDisplay.tsx";
 
 interface Response {
     error?: string;
@@ -35,7 +36,7 @@ const Container = styled.div`
 const MessageHeader = styled.div`
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 30px;
 `;
 
 const AgentLogo = styled.img`
@@ -55,9 +56,7 @@ const LoadingContainer = styled.div`
     align-items: center;
     gap: 16px;
     min-height: 63px;
-    padding: 16px 24px;
     color: ${props => props.theme.colors.textSecondary};
-    margin-left: 44px;
 `;
 
 const LoadingText = styled.span`
@@ -74,39 +73,47 @@ const ErrorMessage = styled.div`
 `;
 
 export const AnswerChat: React.FC<AnswerChatProps> = ({response, isLoading = false}) => {
+    const progressUpdate = useWebSocket();
+    const currentResponse = progressUpdate || response;
+
+    if (!currentResponse && !isLoading) return null;
+
     return (
         <Container>
             <MessageHeader>
                 <AgentLogo src={reactLogo} alt="Agent"/>
-                {isLoading && <LoadingDots/>}
+                {isLoading ? (
+                    <LoadingContainer>
+                        <LoadingDots/>
+                        <LoadingText>에이전트가 응답을 생성하고 있습니다...</LoadingText>
+                    </LoadingContainer>
+                ) : null}
             </MessageHeader>
 
-            {isLoading ? (
-                <LoadingContainer>
-                    <LoadingText>에이전트가 응답을 생성하고 있습니다...</LoadingText>
-                </LoadingContainer>
-            ) : response && (
-                <MessageContent>
-                    {response.error ? (
-                        <ErrorMessage>{response.error}</ErrorMessage>
-                    ) : (
-                        <>
-                            {response.agent_chain_log && response.agent_chain_log.length > 0 && (
-                                <AgentChainLog
-                                    log={response.agent_chain_log}
-                                    reasoning={response.agent_chain_reasoning || '실행 계획이 없습니다.'} // 기본값 제공
-                                />
-                            )}
-                            {response.final_answer_summary && (
-                                <SummaryDisplay summary={response.final_answer_summary}/>
-                            )}
-                            {response.final_user_answer && (
-                                <FinalAnswerDisplay answer={response.final_user_answer}/>
-                            )}
-                        </>
-                    )}
-                </MessageContent>
-            )}
+            <MessageContent>
+                {currentResponse.error ? (
+                    <ErrorMessage>{currentResponse.error}</ErrorMessage>
+                ) : (
+                    <>
+                        {currentResponse.agent_chain_log && currentResponse.agent_chain_log.length > 0 && (
+                            <AgentChainLog
+                                log={currentResponse.agent_chain_log}
+                                reasoning={currentResponse.agent_chain_reasoning || '실행 계획이 없습니다.'} // 기본값 제공
+                            />
+                        )}
+                        {currentResponse.final_answer_summary && (
+                            <SummaryDisplay
+                                summary={currentResponse.final_answer_summary}
+                            />
+                        )}
+                        {currentResponse.final_user_answer && (
+                            <FinalAnswerDisplay
+                                answer={currentResponse.final_user_answer}
+                            />
+                        )}
+                    </>
+                )}
+            </MessageContent>
         </Container>
     );
 };

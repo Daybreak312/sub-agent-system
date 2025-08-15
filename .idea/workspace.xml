@@ -4,13 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5c0ae863-ce43-4103-99f7-d27d8e8ab27c" name="Changes" comment="Main runner modulization.">
-      <change afterPath="$PROJECT_DIR$/backend/src/agents/PromptFatory.ts" afterDir="false" />
+    <list default="true" id="5c0ae863-ce43-4103-99f7-d27d8e8ab27c" name="Changes" comment="Add PromptFatory">
+      <change afterPath="$PROJECT_DIR$/frontend/src/hooks/useWebSocket.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/agents/ChainExecutor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/agents/ChainExecutor.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/agents/ChainPlanner.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/agents/ChainPlanner.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/agents/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/agents/types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/sub_agent_process.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/sub_agent_process.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/agents/MainRunner.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/agents/MainRunner.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/server.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/AgentLogEntry.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/AgentLogEntry.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/AnswerChat.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/AnswerChat.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +41,9 @@
 }</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/result.json" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
@@ -85,7 +95,7 @@
       <option name="presentableId" value="Default" />
       <updated>1755175959307</updated>
       <workItem from="1755175960364" duration="18238000" />
-      <workItem from="1755196886524" duration="26266000" />
+      <workItem from="1755196886524" duration="30244000" />
     </task>
     <task id="LOCAL-00001" summary="Component">
       <option name="closed" value="true" />
@@ -247,7 +257,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755252976305</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Add PromptFatory">
+      <option name="closed" value="true" />
+      <created>1755255228277</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1755255228277</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -268,6 +286,7 @@
     <MESSAGE value="gitignore" />
     <MESSAGE value="Error logging system." />
     <MESSAGE value="Main runner modulization." />
-    <option name="LAST_COMMIT_MESSAGE" value="Main runner modulization." />
+    <MESSAGE value="Add PromptFatory" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add PromptFatory" />
   </component>
 </project>

@@ -75,15 +75,18 @@ export interface AgentChainPlan {
 export interface AgentChainLogEntry {
     agent_name: string;
     reasoning: string;
-    summation: string;
+    summation?: string;
 }
 
 /**
  * 허브가 클라이언트 및 로그 파일에 최종적으로 기록하는 데이터의 구조
  */
 export interface FinalOutput {
-    agent_chain_reasoning: string; // 에이전트 체인 전체에 대한 요약
-    agent_chain_log: AgentChainLogEntry[];
-    final_user_answer: string;
-    final_answer_summary: string; // 최종 답변에 대한 요약
+    final_user_answer?: string;  // 최종 답변이 완료되기 전까진 undefined
+    final_answer_summary?: string;  // 최종 답변이 완료되기 전까진 undefined
+    agent_chain_reasoning: string;  // 계획 단계에서 바로 설정됨
+    agent_chain_log: AgentChainLogEntry[];  // 진행됨에 따라 추가됨
+    is_complete: boolean;  // 전체 프로세스가 완료되었는지 여부
+    current_step?: number;  // 현재 실행 중인 스텝 (0-based)
+    total_steps?: number;  // 전체 스텝 수
 }
