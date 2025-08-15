@@ -8,15 +8,15 @@ import {fileURLToPath} from 'url';
 import cors from 'cors';
 import {errorHandler} from './middleware/errorHandler.js';
 import {BadRequestError} from './errors/AppError.js';
-import {handleUserPrompt, initializeSystem, getSystemStatus, stopAgent} from './main_runner.js';
 import {initializeGeminiClient} from "./gemini_client.js";
+import {MainRunner} from './agents/MainRunner.js';
 import log from './utils/logger.js';
-import {json} from './utils/json.js';
 
 // --- 서버 및 앱 초기화 ---
 const app = express();
 const server = http.createServer(app);
 const PORT = process.env.PORT || 3000;
+const mainRunner = new MainRunner();
 
 // ES 모듈 환경에서 __dirname을 사용하기 위한 설정
 const __filename = fileURLToPath(import.meta.url);
@@ -39,7 +39,7 @@ app.post('/api/prompt', async (req, res, next) => {
             throw new BadRequestError('Prompt is required');
         }
 
-        const result = await handleUserPrompt(prompt);
+        const result = await mainRunner.handleUserPrompt(prompt);
         log.info('프롬프트 처리 완료', 'API', {prompt});
         res.json(result);
     } catch (error) {
@@ -47,22 +47,11 @@ app.post('/api/prompt', async (req, res, next) => {
     }
 });
 
-// 2. 에이전트 상태 확인 API (헬스체크)
-app.get('/api/agents/status', (req, res, next) => {
-    try {
-        log.debug('에이전트 상태 확인 요청', 'API');
-        const status = getSystemStatus();
-        res.json(status);
-    } catch (error) {
-        next(error);
-    }
-});
-
-// 3. 에이전트 관리 API (예: 중지)
+// 2. 에이전트 관리 API (예: 중지)
 app.post('/api/agents/:agentId/stop', (req, res, next) => {
     try {
         const {agentId} = req.params;
-        const result = stopAgent(agentId);
+        const result = mainRunner.stopAgent(agentId);
         res.json(result);
     } catch (error) {
         next(error);
@@ -77,7 +66,7 @@ async function startServer() {
     try {
         log.info('서버 초기화 시작...', 'SYSTEM');
         await initializeGeminiClient();
-        await initializeSystem();
+        await mainRunner.initialize();
 
         server.listen(PORT, () => {
             log.info(`웹 서버가 http://localhost:${PORT} 에서 실행 중입니다.`, 'SYSTEM', {port: PORT});

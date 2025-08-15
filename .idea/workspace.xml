@@ -4,10 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5c0ae863-ce43-4103-99f7-d27d8e8ab27c" name="Changes" comment="gitignore">
-      <change afterPath="$PROJECT_DIR$/backend/src/utils/json.ts" afterDir="false" />
+    <list default="true" id="5c0ae863-ce43-4103-99f7-d27d8e8ab27c" name="Changes" comment="Error logging system.">
+      <change afterPath="$PROJECT_DIR$/backend/src/agents/AgentRegistry.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/agents/ChainExecutor.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/agents/ChainPlanner.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/agents/ConversationHistory.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/agents/MainRunner.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/agents/SubAgentProcess.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/agents/types.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main_runner.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main_runner.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/agents.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/agents.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main_runner.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/server.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/sub_agent_process.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/sub_agent_process.ts" afterDir="false" />
     </list>
@@ -82,7 +89,7 @@
       <option name="presentableId" value="Default" />
       <updated>1755175959307</updated>
       <workItem from="1755175960364" duration="18238000" />
-      <workItem from="1755196886524" duration="22285000" />
+      <workItem from="1755196886524" duration="23951000" />
     </task>
     <task id="LOCAL-00001" summary="Component">
       <option name="closed" value="true" />
@@ -228,7 +235,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755250095909</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Error logging system.">
+      <option name="closed" value="true" />
+      <created>1755251246541</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1755251246541</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -247,6 +262,7 @@
     <MESSAGE value="Glass effect." />
     <MESSAGE value="Add logging system and error resolve system." />
     <MESSAGE value="gitignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="gitignore" />
+    <MESSAGE value="Error logging system." />
+    <option name="LAST_COMMIT_MESSAGE" value="Error logging system." />
   </component>
 </project>
