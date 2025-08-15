@@ -11,6 +11,7 @@ interface Message {
   type: 'user' | 'agent';
   content: any;
   timestamp: Date;
+  isLoading?: boolean;
 }
 
 function App() {
@@ -33,7 +34,16 @@ function App() {
       content: prompt.trim(),
       timestamp: new Date()
     };
-    setMessages(prev => [...prev, userMessage]);
+
+    // 로딩 상태의 임시 에이전트 메시지 추가
+    const loadingMessage: Message = {
+      type: 'agent',
+      content: {},
+      timestamp: new Date(),
+      isLoading: true
+    };
+
+    setMessages(prev => [...prev, userMessage, loadingMessage]);
     setPrompt(''); // 입력창 초기화
 
     try {
@@ -51,23 +61,33 @@ function App() {
 
       const data = await response.json();
 
-      // 에이전트 응답 추가
-      const agentMessage: Message = {
-        type: 'agent',
-        content: data,
-        timestamp: new Date()
-      };
-      setMessages(prev => [...prev, agentMessage]);
-
+      // 로딩 메시지를 실제 응답으로 교체
+      setMessages(prev => {
+        const newMessages = [...prev];
+        const loadingIndex = newMessages.findIndex(msg => msg.isLoading);
+        if (loadingIndex !== -1) {
+          newMessages[loadingIndex] = {
+            type: 'agent',
+            content: data,
+            timestamp: new Date()
+          };
+        }
+        return newMessages;
+      });
     } catch (error) {
-      console.error('Error:', error);
-      // 에러 메시지를 에이전트 메시지로 추가
-      const errorMessage: Message = {
-        type: 'agent',
-        content: { error: '요청 처리 중 오류가 발생했습니다.' },
-        timestamp: new Date()
-      };
-      setMessages(prev => [...prev, errorMessage]);
+      // 에러 발생 시 로딩 메시지를 에러 메시지로 교체
+      setMessages(prev => {
+        const newMessages = [...prev];
+        const loadingIndex = newMessages.findIndex(msg => msg.isLoading);
+        if (loadingIndex !== -1) {
+          newMessages[loadingIndex] = {
+            type: 'agent',
+            content: { error: '요청 처리 중 오류가 발생했습니다.' },
+            timestamp: new Date()
+          };
+        }
+        return newMessages;
+      });
     } finally {
       setLoading(false);
     }

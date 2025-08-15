@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { UserMessage } from './UserMessage';
 import { AnswerChat } from './AnswerChat';
@@ -7,6 +7,7 @@ interface Message {
   type: 'user' | 'agent';
   content: any;
   timestamp: Date;
+  isLoading?: boolean;
 }
 
 interface ChatContainerProps {
@@ -23,15 +24,15 @@ const Container = styled.div`
   flex-direction: column;
   padding: 24px;
   overflow: hidden;
+  background: ${props => props.theme.colors.background};
 `;
 
 const ScrollableArea = styled.div`
   flex: 1;
   overflow-y: auto;
   padding: 0 12px;
-  margin-bottom: 100px; /* PromptInput을 위한 여백 */
+  margin-bottom: 100px;
   
-  /* 스크롤바 스타일링 */
   &::-webkit-scrollbar {
     width: 6px;
     background: transparent;
@@ -61,40 +62,76 @@ const MessageWrapper = styled.div<{ isUser: boolean }>`
   flex-direction: column;
   align-items: ${props => props.isUser ? 'flex-end' : 'flex-start'};
   gap: 8px;
-`;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s ease, transform 0.3s ease;
 
-const TimeIndicator = styled.div`
-  font-size: 0.75rem;
-  color: ${props => props.theme.colors.textSecondary};
-  margin: 0 12px;
+  &[data-entering="true"] {
+    opacity: 0;
+    transform: translateY(20px);
+  }
 `;
 
 export const ChatContainer: React.FC<ChatContainerProps> = ({ messages }) => {
-  const formatTime = (date: Date) => {
-    return new Date(date).toLocaleTimeString('ko-KR', {
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: false
-    });
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const messageRefs = useRef<Map<string, boolean>>(new Map());
+
+  const scrollToBottom = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTo({
+        top: scrollRef.current.scrollHeight,
+        behavior: 'smooth'
+      });
+    }
   };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+  // 새 메시지가 추가될 때 애니메이션 처리
+  useEffect(() => {
+    messages.forEach((msg, index) => {
+      const key = `${msg.type}-${msg.timestamp.getTime()}-${index}`;
+      if (!messageRefs.current.has(key)) {
+        messageRefs.current.set(key, true);
+        setTimeout(() => {
+          const element = document.querySelector(`[data-message-key="${key}"]`);
+          if (element) {
+            element.setAttribute('data-entering', 'false');
+          }
+        }, 100);
+      }
+    });
+  }, [messages]);
 
   return (
     <Container>
-      <ScrollableArea>
+      <ScrollableArea ref={scrollRef}>
         <MessagesContainer>
-          {messages.map((message, index) => (
-            <MessageWrapper key={index} isUser={message.type === 'user'}>
-              {message.type === 'user' ? (
-                <UserMessage
-                  content={message.content}
-                  timestamp={message.timestamp}
-                />
-              ) : (
-                <AnswerChat response={message.content} />
-              )}
-              <TimeIndicator>{formatTime(message.timestamp)}</TimeIndicator>
-            </MessageWrapper>
-          ))}
+          {messages.map((message, index) => {
+            const key = `${message.type}-${message.timestamp.getTime()}-${index}`;
+            return (
+              <MessageWrapper
+                key={key}
+                data-message-key={key}
+                data-entering="true"
+                isUser={message.type === 'user'}
+              >
+                {message.type === 'user' ? (
+                  <UserMessage
+                    content={message.content}
+                    timestamp={message.timestamp}
+                  />
+                ) : (
+                  <AnswerChat
+                    response={message.content}
+                    isLoading={message.isLoading}
+                  />
+                )}
+              </MessageWrapper>
+            );
+          })}
         </MessagesContainer>
       </ScrollableArea>
     </Container>

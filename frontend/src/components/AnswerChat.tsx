@@ -1,44 +1,114 @@
 // frontend/src/components/AnswerChat.tsx
 import React from 'react';
 import styled from 'styled-components';
+import { GlassCard } from './GlassCard';
+import { LoadingDots } from './LoadingDots';
 import AgentChainLog from './AgentChainLog';
 import SummaryDisplay from './SummaryDisplay';
 import FinalAnswerDisplay from './FinalAnswerDisplay';
-import GlassCard from './GlassCard'; // GlassCard 컴포넌트 임포트
+import reactLogo from '../assets/react.svg';
 
-interface AnswerChatProps {
-  response: {
-    agent_chain_log: any[]; // AgentChainLogEntry[]
-    agent_chain_reasoning: string;
-    final_user_answer: string;
-    final_answer_summary: string;
-  };
+interface Response {
+  error?: string;
+  agent_chain_log?: Array<{
+    agent_name: string;
+    reasoning: string;
+    summation: string;
+  }>;
+  agent_chain_reasoning?: string;
+  final_answer_summary?: string;
+  final_user_answer?: string;
 }
 
-const StyledAnswerChatContainer = styled.div`
-  margin-top: ${props => props.theme.spacing.large};
-  width: 70%;
-  margin: ${props => props.theme.spacing.large} auto;
-  text-align: left;
+interface AnswerChatProps {
+  response?: Response;
+  isLoading?: boolean;
+}
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-self: flex-start;
+  max-width: 80%;
 `;
 
-export const AnswerChat: React.FC<AnswerChatProps> = ({ response }) => {
+const MessageHeader = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+`;
+
+const AgentLogo = styled.img`
+  width: 32px;
+  height: 32px;
+`;
+
+const MessageContent = styled.div`
+  margin-left: 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+`;
+
+const LoadingContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 63px;
+  padding: 16px 24px;
+  color: ${props => props.theme.colors.textSecondary};
+  margin-left: 44px;
+`;
+
+const LoadingText = styled.span`
+  font-size: 0.9rem;
+  opacity: 0.8;
+`;
+
+const ErrorMessage = styled.div`
+  color: ${props => props.theme.colors.error};
+  padding: 12px;
+  border-radius: 6px;
+  background: ${props => props.theme.colors.error}11;
+  margin-left: 44px;
+`;
+
+export const AnswerChat: React.FC<AnswerChatProps> = ({ response, isLoading = false }) => {
   return (
-    <StyledAnswerChatContainer>
-      <h2>에이전트 응답</h2>
-      
-      {response.agent_chain_log && response.agent_chain_log.length > 0 && (
-        <AgentChainLog log={response.agent_chain_log} reasoning={response.agent_chain_reasoning} />
-      )}
+    <Container>
+      <MessageHeader>
+        <AgentLogo src={reactLogo} alt="Agent" />
+        {isLoading && <LoadingDots />}
+      </MessageHeader>
 
-      {response.final_answer_summary && (
-        <SummaryDisplay summary={response.final_answer_summary} />
+      {isLoading ? (
+        <LoadingContainer>
+          <LoadingText>에이전트가 응답을 생성하고 있습니다...</LoadingText>
+        </LoadingContainer>
+      ) : response && (
+        <MessageContent>
+          {response.error ? (
+            <ErrorMessage>{response.error}</ErrorMessage>
+          ) : (
+            <>
+              {response.agent_chain_log && response.agent_chain_log.length > 0 && (
+                <AgentChainLog
+                  log={response.agent_chain_log}
+                  reasoning={response.agent_chain_reasoning}
+                />
+              )}
+              {response.final_answer_summary && (
+                <SummaryDisplay summary={response.final_answer_summary} />
+              )}
+              {response.final_user_answer && (
+                <FinalAnswerDisplay answer={response.final_user_answer} />
+              )}
+            </>
+          )}
+        </MessageContent>
       )}
-
-      {response.final_user_answer && (
-        <FinalAnswerDisplay answer={response.final_user_answer} />
-      )}
-    </StyledAnswerChatContainer>
+    </Container>
   );
 };
 

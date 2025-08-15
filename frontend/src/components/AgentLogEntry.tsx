@@ -3,45 +3,57 @@ import React from 'react';
 import styled from 'styled-components';
 
 interface AgentLogEntryProps {
-  entry: {
-    agent_name: string;
-    reasoning: string;
-    summation: string;
-  };
-  index: number;
+  agentName: string;
+  reasoning: string;
+  summation: string;
 }
 
-const StyledAgentLogEntry = styled.div`
-  margin-bottom: ${props => props.theme.spacing.small};
-  padding: ${props => props.theme.spacing.small};
-  border: 1px solid ${props => props.theme.colors.logEntryBorder};
-  border-radius: ${props => props.theme.borderRadius.default};
-  background-color: ${props => props.theme.colors.logEntryBackground};
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-left: 16px;
+  border-left: 2px solid ${props => props.theme.colors.primary}22;
+`;
 
-  p {
-    margin: 0;
-    padding: 0;
-    color: ${props => props.theme.colors.text}; /* 텍스트 색상 적용 */
-  }
+const AgentName = styled.div`
+  font-weight: 600;
+  color: ${props => props.theme.colors.primary};
+  font-size: 0.9rem;
+`;
 
-  p:first-child {
-    font-weight: bold;
-    color: ${props => props.theme.colors.primary};
-  }
+const Section = styled.div`
+  color: ${props => props.theme.colors.text};
+  font-size: 0.9rem;
+  line-height: 1.6;
 
-  p:not(:first-child) {
-    font-size: 0.9em;
+  & + & {
+    margin-top: 8px;
   }
 `;
 
-const AgentLogEntry: React.FC<AgentLogEntryProps> = ({ entry, index }) => {
+const SectionTitle = styled.div`
+  color: ${props => props.theme.colors.textSecondary};
+  font-size: 0.8rem;
+  margin-bottom: 4px;
+`;
+
+export const AgentLogEntry: React.FC<AgentLogEntryProps> = ({
+  agentName,
+  reasoning,
+  summation,
+}) => {
   return (
-    <StyledAgentLogEntry>
-      <p><strong>{index + 1}. {entry.agent_name}</strong></p>
-      <p><strong>설명: </strong>{entry.reasoning}</p>
-      <p><strong>요약: </strong>{entry.summation}</p>
-    </StyledAgentLogEntry>
+    <Container>
+      <AgentName>{agentName}</AgentName>
+      <Section>
+        <SectionTitle>추론 과정</SectionTitle>
+        {reasoning}
+      </Section>
+      <Section>
+        <SectionTitle>요약</SectionTitle>
+        {summation}
+      </Section>
+    </Container>
   );
 };
-
-export default AgentLogEntry;
