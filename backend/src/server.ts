@@ -11,6 +11,7 @@ import {BadRequestError} from './errors/AppError.js';
 import {handleUserPrompt, initializeSystem, getSystemStatus, stopAgent} from './main_runner.js';
 import {initializeGeminiClient} from "./gemini_client.js";
 import log from './utils/logger.js';
+import {json} from './utils/json.js';
 
 // --- 서버 및 앱 초기화 ---
 const app = express();
@@ -58,13 +59,13 @@ app.get('/api/agents/status', (req, res, next) => {
 });
 
 // 3. 에이전트 관리 API (예: 중지)
-app.post('/api/agents/:agentId/stop', (req, res) => {
+app.post('/api/agents/:agentId/stop', (req, res, next) => {
     try {
         const {agentId} = req.params;
         const result = stopAgent(agentId);
         res.json(result);
-    } catch (error: any) {
-        res.status(500).json({error: 'Failed to stop agent.', details: error.message});
+    } catch (error) {
+        next(error);
     }
 });
 

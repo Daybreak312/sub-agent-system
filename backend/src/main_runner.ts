@@ -10,6 +10,7 @@ import {generateText} from './gemini_client.js';
 import type {AgentTask, AgentResult, AgentChainPlan, FinalOutput, AgentChainLogEntry} from './types.js';
 import {AgentError, NotFoundError} from './errors/AppError.js';
 import log from './utils/logger.js';
+import { json } from './utils/json.js';
 
 // ES 모듈에서 __dirname을 사용하기 위한 설정
 const __filename = fileURLToPath(import.meta.url);
@@ -27,15 +28,15 @@ export async function initializeSystem() {
         const configPath = path.join(__dirname, '..', 'agents.yml');
 
         if (!fs.existsSync(configPath)) {
-            log.error('Agent configuration file not found', 'SYSTEM', {configPath});
+            log.error('Agent configuration file not found', 'SYSTEM', { configPath });
             throw new NotFoundError('Agent configuration file not found');
         }
 
         const config = yaml.load(fs.readFileSync(configPath, 'utf-8')) as any;
-        const {sub_agents} = config;
+        const { sub_agents } = config;
 
         if (!sub_agents || !Array.isArray(sub_agents)) {
-            log.error('Invalid agent configuration format', 'SYSTEM', {config});
+            log.error('Invalid agent configuration format', 'SYSTEM', { config });
             throw new AgentError('Invalid agent configuration format');
         }
 
@@ -113,7 +114,7 @@ function startSubAgent(agentConfig: any) {
     log.info(`서브 에이전트 [${agentId}] 프로세스를 시작합니다...`, 'AGENT', { agentId });
 
     const scriptPath = path.join(__dirname, 'sub_agent_process.js');
-    const childProcess = fork(scriptPath, [JSON.stringify(agentConfig)], {
+    const childProcess = fork(scriptPath, [json.stringify(agentConfig, '에이전트 설정')], {
         stdio: ['inherit', 'inherit', 'inherit', 'ipc']
     });
 
@@ -179,7 +180,7 @@ async function phase1_get_agent_chain_plan(user_prompt: string): Promise<AgentCh
   `;
 
     const plan_json_string = await generateText(planning_prompt);
-    const plan: AgentChainPlan = JSON.parse(plan_json_string);
+    const plan = json.parse<AgentChainPlan>(plan_json_string, '에이전트 체인 계획');
 
     log.info('Phase 1: 계획 수립 완료', 'SYSTEM', {
         numberOfSteps: plan.steps.length,
@@ -256,11 +257,12 @@ async function phase2_execute_plan_and_get_final_answer(user_prompt: string, pla
     }
 
     --- 에이전트 실행 결과 ---
-    ${JSON.stringify({agent_chain_results}, null, 2)}
+    ${json.stringify({ agent_chain_results }, '체인 결과')}
   `;
 
-    const final_answer: FinalOutput = JSON.parse(
-        await generateText(synthesis_prompt)
+    const final_answer = json.parse<FinalOutput>(
+        await generateText(synthesis_prompt),
+        '최종 답변'
     );
     final_answer.agent_chain_reasoning = plan.reasoning;
     final_answer.agent_chain_log = agent_chain_log;
@@ -320,16 +322,18 @@ function updateHistoryAndLog(user_prompt: string, output: FinalOutput) {
 
     // 대화 내용을 파일에 저장
     try {
-        fs.appendFileSync('./conversation.log', JSON.stringify({
-            timestamp: new Date().toISOString(),
-            userInput: user_prompt,
-            output
-        }) + '\n');
+        fs.appendFileSync('./conversation.log',
+            json.stringify({
+                timestamp: new Date().toISOString(),
+                userInput: user_prompt,
+                output
+            }, '대화 내용 저장') + '\n'
+        );
 
         log.debug('대화 내용 저장 완료', 'SYSTEM', {
             historyLength: hubConversationHistory.length
         });
     } catch (error) {
-        log.error('대화 내용 ��장 실패', 'SYSTEM', { error });
+        log.error('대화 내용 저장 실패', 'SYSTEM', { error });
     }
 }

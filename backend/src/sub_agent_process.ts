@@ -7,6 +7,7 @@ import {fileURLToPath} from 'url';
 import {generateText, initializeGeminiClient} from './gemini_client.js';
 import type {AgentTask, AgentResult} from './types.js';
 import log from './utils/logger.js';
+import { json } from './utils/json.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -25,7 +26,7 @@ let agentSystemPrompt: string;
 // --- 메인 작업 처리 함수 ---
 async function handleTask(payload: AgentTask) {
     const {new_task, hub_context} = payload;
-    log.info(`[${agentConfig.id}] 작업 수신: ${new_task}`, 'AGENT', { agentId: agentConfig.id });
+    log.info(`작업 수신`, 'AGENT', { agentId: agentConfig.id });
 
     try {
         // 1. 최종 프롬프트 구성 (JSON 출력 형식 명시)
@@ -50,14 +51,14 @@ async function handleTask(payload: AgentTask) {
         const llmResponseString = await generateText(finalPrompt);
 
         // 3. LLM의 응답을 파싱하고 타입에 맞춰 반환
-        const parsedResponse: AgentResult = JSON.parse(llmResponseString);
+        const parsedResponse = json.parse<AgentResult>(llmResponseString, `에이전트 ${agentConfig.id}의 LLM 응답`);
 
         process.send?.({
             type: 'task_result',
             payload: parsedResponse
         });
     } catch (error) {
-        log.error(`[${agentConfig.id}] 작업 처리 실패`, 'AGENT', {
+        log.error(`작업 처리 실패`, 'AGENT', {
             agentId: agentConfig.id,
             error: error instanceof Error ? error.message : 'Unknown error'
         });
@@ -77,7 +78,7 @@ async function initialize() {
         await initializeGeminiClient();
 
         if (!process.argv[2]) throw new Error("Agent configuration not provided.");
-        agentConfig = JSON.parse(process.argv[2]);
+        agentConfig = json.parse(process.argv[2], "에이전트 설정");
 
         const contextFilePath = path.join(__dirname, '..', 'contexts', `${agentConfig.id}.md`);
         if (!fs.existsSync(contextFilePath)) {
@@ -119,7 +120,7 @@ async function initialize() {
 function startHealthCheckServer(agentId: string, port: number): Promise<net.Server> {
     return new Promise((resolve, reject) => {
         const server = net.createServer((socket) => {
-            socket.write(JSON.stringify({pong: agentId}));
+            socket.write(json.stringify({ pong: agentId }, "헬스체크 응답"));
             socket.end();
         });
         server.on('error', reject);
