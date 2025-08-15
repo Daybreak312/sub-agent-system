@@ -4,20 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5c0ae863-ce43-4103-99f7-d27d8e8ab27c" name="Changes" comment="Add PromptFatory">
-      <change afterPath="$PROJECT_DIR$/frontend/src/hooks/useWebSocket.ts" afterDir="false" />
+    <list default="true" id="5c0ae863-ce43-4103-99f7-d27d8e8ab27c" name="Changes" comment="Refact socket logic">
+      <change afterPath="$PROJECT_DIR$/frontend/src/pages/ChatPage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/types/chat.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/agents/ChainExecutor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/agents/ChainExecutor.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/agents/MainRunner.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/agents/MainRunner.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/server.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/AgentLogEntry.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/AgentLogEntry.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/AnswerChat.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/AnswerChat.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/LoadingDots.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/LoadingDots.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,6 +67,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/frontend/src/assets" />
       <recent name="$PROJECT_DIR$/backend/src/agents/" />
       <recent name="$PROJECT_DIR$/backend/src/utils" />
       <recent name="$PROJECT_DIR$/" />
@@ -95,7 +89,7 @@
       <option name="presentableId" value="Default" />
       <updated>1755175959307</updated>
       <workItem from="1755175960364" duration="18238000" />
-      <workItem from="1755196886524" duration="30244000" />
+      <workItem from="1755196886524" duration="33618000" />
     </task>
     <task id="LOCAL-00001" summary="Component">
       <option name="closed" value="true" />
@@ -265,7 +259,23 @@
       <option name="project" value="LOCAL" />
       <updated>1755255228277</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Socket based agentchain monitoring">
+      <option name="closed" value="true" />
+      <created>1755259256131</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1755259256131</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Refact socket logic">
+      <option name="closed" value="true" />
+      <created>1755260105928</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1755260105928</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -287,6 +297,8 @@
     <MESSAGE value="Error logging system." />
     <MESSAGE value="Main runner modulization." />
     <MESSAGE value="Add PromptFatory" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add PromptFatory" />
+    <MESSAGE value="Socket based agentchain monitoring" />
+    <MESSAGE value="Refact socket logic" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refact socket logic" />
   </component>
 </project>
