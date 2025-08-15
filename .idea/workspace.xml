@@ -4,12 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5c0ae863-ce43-4103-99f7-d27d8e8ab27c" name="Changes" comment="Refact socket logic">
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/ChatPage.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/types/chat.ts" afterDir="false" />
+    <list default="true" id="5c0ae863-ce43-4103-99f7-d27d8e8ab27c" name="Changes" comment="Page">
+      <change afterPath="$PROJECT_DIR$/frontend/public/favicon.ico" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/react.svg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/AnswerChat.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/AnswerChat.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/EmptyState.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/EmptyState.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/LoadingDots.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/LoadingDots.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -54,7 +55,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/daybreak312/gemini/agent",
+    "last_opened_file_path": "/Users/daybreak312/gemini/agent/frontend/public",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -66,12 +67,15 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/frontend/public" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/frontend/public" />
+      <recent name="$PROJECT_DIR$/frontend/" />
       <recent name="$PROJECT_DIR$/frontend/src/assets" />
       <recent name="$PROJECT_DIR$/backend/src/agents/" />
       <recent name="$PROJECT_DIR$/backend/src/utils" />
-      <recent name="$PROJECT_DIR$/" />
-      <recent name="$PROJECT_DIR$" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -89,7 +93,7 @@
       <option name="presentableId" value="Default" />
       <updated>1755175959307</updated>
       <workItem from="1755175960364" duration="18238000" />
-      <workItem from="1755196886524" duration="33618000" />
+      <workItem from="1755196886524" duration="37011000" />
     </task>
     <task id="LOCAL-00001" summary="Component">
       <option name="closed" value="true" />
@@ -275,7 +279,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755260105928</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Page">
+      <option name="closed" value="true" />
+      <created>1755263544104</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1755263544104</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -299,6 +311,7 @@
     <MESSAGE value="Add PromptFatory" />
     <MESSAGE value="Socket based agentchain monitoring" />
     <MESSAGE value="Refact socket logic" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refact socket logic" />
+    <MESSAGE value="Page" />
+    <option name="LAST_COMMIT_MESSAGE" value="Page" />
   </component>
 </project>

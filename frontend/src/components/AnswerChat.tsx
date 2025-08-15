@@ -5,7 +5,7 @@ import {LoadingDots} from './LoadingDots';
 import {AgentChainLog} from './AgentChainLog';
 import {SummaryDisplay} from './SummaryDisplay';
 import {useWebSocket} from '../hooks/useWebSocket';
-import reactLogo from '../assets/react.svg';
+import logo from '../assets/logo.svg';
 import FinalAnswerDisplay from "./FinalAnswerDisplay.tsx";
 
 interface Response {
@@ -41,7 +41,6 @@ const MessageHeader = styled.div`
 
 const AgentLogo = styled.img`
     width: 32px;
-    height: 32px;
 `;
 
 const MessageContent = styled.div`
@@ -81,11 +80,11 @@ export const AnswerChat: React.FC<AnswerChatProps> = ({response, isLoading = fal
     return (
         <Container>
             <MessageHeader>
-                <AgentLogo src={reactLogo} alt="Agent"/>
+                <AgentLogo src={logo} alt="Agent"/>
                 {isLoading ? (
                     <LoadingContainer>
-                        <LoadingDots/>
                         <LoadingText>에이전트가 응답을 생성하고 있습니다...</LoadingText>
+                        <LoadingDots/>
                     </LoadingContainer>
                 ) : null}
             </MessageHeader>

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
-import reactLogo from '../assets/react.svg';
+import reactLogo from '../assets/loading.svg';
 
 const rotate = keyframes`
     0% {

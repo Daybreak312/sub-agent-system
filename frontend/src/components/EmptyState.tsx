@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import reactLogo from '../assets/react.svg';
+import logo from '../assets/logo.svg';
 
 const Container = styled.div`
   display: flex;
@@ -31,32 +31,36 @@ const Logo = styled.img`
 `;
 
 const Title = styled.h1<{ textLength: number }>`
-  color: ${props => props.theme.colors.primary};
-  font-size: 2.5rem;
-  margin: 0;
-  background: linear-gradient(135deg, 
-    ${props => props.theme.colors.primary}, 
-    ${props => props.theme.colors.secondary}
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-align: center;
-  position: relative;
-  width: fit-content;
-
-  &::before {
-    content: '|';
-    position: absolute;
-    right: -0.2em;
     color: ${props => props.theme.colors.primary};
-    -webkit-text-fill-color: ${props => props.theme.colors.primary};
-    animation: blink 1s step-end infinite;
-  }
+    font-size: 2.5rem;
+    margin: 0;
+    background: linear-gradient(170deg,
+    ${props => props.theme.colors.secondary},
+    ${props => props.theme.colors.border}
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    position: relative;
+    width: fit-content;
 
-  @keyframes blink {
-    from, to { opacity: 1; }
-    50% { opacity: 0; }
-  }
+    &::before {
+        content: '|';
+        position: absolute;
+        right: -0.3em;
+        color: ${props => props.theme.colors.cardBorder};
+        -webkit-text-fill-color: ${props => props.theme.colors.cardBorder};
+        animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+        from, to {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0;
+        }
+    }
 `;
 
 const AnimatedTitle: React.FC = () => {
@@ -91,7 +95,7 @@ const Subtitle = styled.p`
 export const EmptyState = () => {
   return (
     <Container>
-      <Logo src={reactLogo} alt="Local Agent Weaver Logo" />
+      <Logo src={logo} alt="Local Agent Weaver Logo" />
       <AnimatedTitle />
       <Subtitle>
         독립적인 다중 에이전트 플랫폼에 오신 것을 환영합니다.
