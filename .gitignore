@@ -12,8 +12,8 @@ dist
 dist-ssr
 *.local
 
-backend/node_modules
-backend/dist/
+backend/node_modules/*
+backend/dist/*
 
 # Editor directories and files
 .vscode/*
