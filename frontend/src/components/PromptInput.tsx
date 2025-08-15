@@ -18,7 +18,7 @@ const FixedContainer = styled.div`
   max-width: 1200px;
   z-index: 1000;
   display: flex;
-  gap: 12px;
+  gap: 24px; /* 12px에서 24px로 증가 */
   align-items: flex-end;
 `;
 
@@ -27,9 +27,11 @@ const InputContainer = styled(GlassCard)`
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  padding: 16px;
+  padding: 18px;
   transition: all 0.3s ease;
-  min-height: 56px; /* 최소 높이 설정 */
+  min-height: 40px;
+  display: flex;
+  justify-content: center; /* align-items에서 변경 */
 
   &:hover {
     border-color: rgba(255, 255, 255, 0.2);
@@ -47,10 +49,13 @@ const StyledTextArea = styled.textarea`
   resize: none;
   outline: none;
   padding: 0;
-  height: 24px; /* 기본 한 줄 높이 */
+  height: 24px;
   min-height: 24px;
   max-height: 150px;
   overflow-y: hidden;
+  display: flex;
+  align-items: center;
+  vertical-align: middle;
 
   &::placeholder {
     color: ${props => props.theme.colors.textSecondary};
@@ -58,19 +63,22 @@ const StyledTextArea = styled.textarea`
 `;
 
 const SubmitButton = styled(GlassCard)`
-  padding: 16px 24px;
+  width: 60px; /* 42px * 1.5 = 63px */
+  height: 60px; /* 42px * 1.5 = 63px */
+  padding: 0;
+  margin: 0 0 8px 0; 
   background: ${props => props.theme.colors.primary}44;
   color: ${props => props.theme.colors.text};
   border: 1px solid ${props => props.theme.colors.primary}22;
   cursor: pointer;
   font-weight: 600;
   transition: all 0.2s ease;
-  white-space: nowrap;
   backdrop-filter: blur(20px);
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 56px; /* InputContainer의 최소 높이와 동일하게 설정 */
+  border-radius: 50%;
+  font-size: 1.5rem; /* 화살표 크기도 키워줍니다 */
 
   &:hover {
     background: ${props => props.theme.colors.primary}66;
@@ -122,8 +130,9 @@ export const PromptInput: React.FC<PromptInputProps> = ({
         as="button"
         onClick={onSubmit}
         disabled={loading || !prompt.trim()}
+        aria-label="메시지 전송"
       >
-        {loading ? '처리 중...' : '전송'}
+        →
       </SubmitButton>
     </FixedContainer>
   );

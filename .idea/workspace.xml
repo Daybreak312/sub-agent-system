@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5c0ae863-ce43-4103-99f7-d27d8e8ab27c" name="Changes" comment="Modify CSS">
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/PromptInput.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/UserMessage.tsx" afterDir="false" />
+    <list default="true" id="5c0ae863-ce43-4103-99f7-d27d8e8ab27c" name="Changes" comment="UI refact.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/conversation.log" beforeDir="false" afterPath="$PROJECT_DIR$/backend/conversation.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/PromptInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/PromptInput.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +79,7 @@
       <option name="presentableId" value="Default" />
       <updated>1755175959307</updated>
       <workItem from="1755175960364" duration="18238000" />
-      <workItem from="1755196886524" duration="3801000" />
+      <workItem from="1755196886524" duration="4819000" />
     </task>
     <task id="LOCAL-00001" summary="Component">
       <option name="closed" value="true" />
@@ -108,7 +105,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755198155884</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="UI refact.">
+      <option name="closed" value="true" />
+      <created>1755232638409</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1755232638409</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -120,6 +125,7 @@
     <MESSAGE value="Component" />
     <MESSAGE value="Styled Component, liquid ui testing" />
     <MESSAGE value="Modify CSS" />
-    <option name="LAST_COMMIT_MESSAGE" value="Modify CSS" />
+    <MESSAGE value="UI refact." />
+    <option name="LAST_COMMIT_MESSAGE" value="UI refact." />
   </component>
 </project>

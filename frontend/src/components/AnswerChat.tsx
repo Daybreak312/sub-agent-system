@@ -22,7 +22,7 @@ const StyledAnswerChatContainer = styled.div`
   text-align: left;
 `;
 
-const AnswerChat: React.FC<AnswerChatProps> = ({ response }) => {
+export const AnswerChat: React.FC<AnswerChatProps> = ({ response }) => {
   return (
     <StyledAnswerChatContainer>
       <h2>에이전트 응답</h2>

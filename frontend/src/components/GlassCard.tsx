@@ -23,7 +23,7 @@ const StyledGlassCard = styled(Squircle)`
   gap: ${props => props.theme.spacing.medium};
 `;
 
-const GlassCard: React.FC<GlassCardProps> = ({ children, className, style }) => {
+export const GlassCard: React.FC<GlassCardProps> = ({ children, className, style }) => {
   return (
     <StyledGlassCard
       cornerRadius={parseInt(theme.borderRadius.squircle)} 

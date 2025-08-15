@@ -45,3 +45,5 @@ export const UserMessage: React.FC<UserMessageProps> = ({ content, timestamp }) 
     </MessageContainer>
   );
 };
+
+export default UserMessage;
