@@ -4,7 +4,6 @@ import { GlassCard } from './GlassCard';
 
 interface UserMessageProps {
   content: string;
-  timestamp: Date;
 }
 
 const MessageContainer = styled(GlassCard)`
@@ -18,30 +17,16 @@ const MessageContainer = styled(GlassCard)`
 `;
 
 const MessageContent = styled.div`
-  color: ${props => props.theme.colors.text};
-  line-height: 1.5;
-  white-space: pre-wrap;
-  word-break: break-word;
+    color: ${props => props.theme.colors.text};
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-break: break-word;
 `;
 
-const Timestamp = styled.div`
-  font-size: 0.75rem;
-  color: ${props => props.theme.colors.textSecondary};
-  margin-top: 8px;
-  text-align: right;
-`;
-
-export const UserMessage: React.FC<UserMessageProps> = ({ content, timestamp }) => {
+export const UserMessage: React.FC<UserMessageProps> = ({ content }) => {
   return (
     <MessageContainer>
       <MessageContent>{content}</MessageContent>
-      <Timestamp>
-        {new Intl.DateTimeFormat('ko-KR', {
-          hour: '2-digit',
-          minute: '2-digit',
-          hour12: false
-        }).format(timestamp)}
-      </Timestamp>
     </MessageContainer>
   );
 };

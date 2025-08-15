@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 import styled from 'styled-components';
 import GlassCard from './GlassCard';
 
@@ -30,9 +30,8 @@ const InputContainer = styled(GlassCard)`
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     padding: 18px;
     transition: all 0.3s ease;
-    min-height: 76px;
     display: flex;
-    justify-content: center; /* align-items에서 변경 */
+    align-items: flex-start;
 
     &:hover {
         border-color: rgba(255, 255, 255, 0.2);
@@ -50,13 +49,11 @@ const StyledTextArea = styled.textarea`
     resize: none;
     outline: none;
     padding: 0;
-    height: 24px;
-    min-height: 24px;
+    min-height: 40px;
     max-height: 150px;
+    margin-bottom: 0.6rem;
     overflow-y: hidden;
-    display: flex;
-    align-items: center;
-    vertical-align: middle;
+    transition: all 0.2s ease;
 
     &::placeholder {
         color: ${props => props.theme.colors.textSecondary};
@@ -99,6 +96,8 @@ export const PromptInput: React.FC<PromptInputProps> = ({
                                                             onPromptChange,
                                                             onSubmit
                                                         }) => {
+    const textareaRef = useRef<HTMLTextAreaElement>(null);
+
     const handleKeyPress = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
         if (event.key === 'Enter' && !event.shiftKey) {
             event.preventDefault();
@@ -110,15 +109,26 @@ export const PromptInput: React.FC<PromptInputProps> = ({
 
     const adjustTextAreaHeight = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         const element = event.target;
-        element.style.height = '24px'; // 리셋
+        if (!element) return;
+
+        // 스크롤 높이를 측정하기 전에 높이를 자동으로 조절
+        element.style.height = 'auto';
         element.style.height = `${element.scrollHeight}px`;
         onPromptChange(event);
     };
+
+    // 프롬프트가 비워질 때 높이 리셋
+    useEffect(() => {
+        if (!prompt && textareaRef.current) {
+            textareaRef.current.style.height = '24px';
+        }
+    }, [prompt]);
 
     return (
         <FixedContainer>
             <InputContainer>
                 <StyledTextArea
+                    ref={textareaRef}
                     placeholder="메시지를 입력하세요... (Enter로 전송, Shift + Enter로 줄바꿈)"
                     value={prompt}
                     onChange={adjustTextAreaHeight}

@@ -10,9 +10,9 @@ export const VerticalLineContainer = styled.div<VerticalLineContainerProps>`
   flex-direction: column;
   gap: 12px;
   padding-left: ${props => props.spacing || '16px'};
-  border-left: 2px solid ${props => 
-    props.lineColor || 
-    `${props.theme.colors.primary}22`
+  border-left: 2px solid ${props =>
+      props.lineColor ||
+      `${props.theme.colors.primary}22`
   };
   margin: 8px 0;
 `;

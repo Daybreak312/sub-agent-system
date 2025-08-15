@@ -15,8 +15,8 @@ const StyledGlassCard = styled(Squircle)`
   backdrop-filter: blur(10px);
   border: 1px solid ${props => props.theme.colors.glassBorder};
   box-shadow: ${props => props.theme.shadows.default};
-  border-radius: ${props => props.theme.borderRadius.card}; 
-  
+  border-radius: ${props => props.theme.borderRadius.card};
+
   padding: ${props => props.theme.spacing.large};
   display: flex;
   flex-direction: column;

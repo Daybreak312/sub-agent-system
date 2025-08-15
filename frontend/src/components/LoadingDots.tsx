@@ -3,12 +3,12 @@ import styled, { keyframes } from 'styled-components';
 import reactLogo from '../assets/react.svg';
 
 const rotate = keyframes`
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 `;
 
 const Container = styled.div`

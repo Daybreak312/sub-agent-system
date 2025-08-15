@@ -19,10 +19,10 @@ const Content = styled.div`
 `;
 
 const SectionTitle = styled.div`
-  color: ${props => props.theme.colors.textSecondary};
-  font-size: 1rem;
-  margin-bottom: 0;
-  margin-left: 0;
+    color: ${props => props.theme.colors.textSecondary};
+    font-size: 1rem;
+    margin-bottom: 0;
+    margin-left: 0;
 `;
 
 export const SummaryDisplay: React.FC<SummaryDisplayProps> = ({ summary }) => {
