@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5c0ae863-ce43-4103-99f7-d27d8e8ab27c" name="Changes" comment="Styled Component, liquid ui testing">
+    <list default="true" id="5c0ae863-ce43-4103-99f7-d27d8e8ab27c" name="Changes" comment="Modify CSS">
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/PromptInput.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/UserMessage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/AgentChainLog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/AgentChainLog.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/AnswerChat.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/AnswerChat.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/FinalAnswerDisplay.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/FinalAnswerDisplay.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/SummaryDisplay.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/SummaryDisplay.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/styles/GlobalStyles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/styles/GlobalStyles.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/conversation.log" beforeDir="false" afterPath="$PROJECT_DIR$/backend/conversation.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +38,9 @@
   &quot;associatedIndex&quot;: 1
 }</component>
   <component name="ProjectId" id="31HLGxcR0XhbEcY0EYpZx1arLwa" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
@@ -80,7 +82,7 @@
       <option name="presentableId" value="Default" />
       <updated>1755175959307</updated>
       <workItem from="1755175960364" duration="18238000" />
-      <workItem from="1755196886524" duration="1260000" />
+      <workItem from="1755196886524" duration="3801000" />
     </task>
     <task id="LOCAL-00001" summary="Component">
       <option name="closed" value="true" />
@@ -98,7 +100,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755196919804</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Modify CSS">
+      <option name="closed" value="true" />
+      <created>1755198155884</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1755198155884</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -109,6 +119,7 @@
     <MESSAGE value="Edit response scheme" />
     <MESSAGE value="Component" />
     <MESSAGE value="Styled Component, liquid ui testing" />
-    <option name="LAST_COMMIT_MESSAGE" value="Styled Component, liquid ui testing" />
+    <MESSAGE value="Modify CSS" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modify CSS" />
   </component>
 </project>
