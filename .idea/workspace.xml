@@ -4,14 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5c0ae863-ce43-4103-99f7-d27d8e8ab27c" name="Changes" comment="Editing Chatting UI">
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/EmptyState.tsx" afterDir="false" />
+    <list default="true" id="5c0ae863-ce43-4103-99f7-d27d8e8ab27c" name="Changes" comment="Glass effect.">
+      <change afterPath="$PROJECT_DIR$/backend/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/errors/AppError.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/middleware/errorHandler.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/utils/logger.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/conversation.log" beforeDir="false" afterPath="$PROJECT_DIR$/backend/conversation.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/ChatContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/ChatContainer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/GlassCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/GlassCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/PromptInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/PromptInput.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/dist/gemini_client.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/dist/gemini_client.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/dist/main_runner.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/dist/main_runner.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/dist/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/dist/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/dist/sub_agent_process.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/dist/sub_agent_process.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/.package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/gemini_client.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/gemini_client.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main_runner.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main_runner.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/mcp_sdk_mock.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/server.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/sub_agent_process.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/sub_agent_process.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +95,7 @@
       <option name="presentableId" value="Default" />
       <updated>1755175959307</updated>
       <workItem from="1755175960364" duration="18238000" />
-      <workItem from="1755196886524" duration="17313000" />
+      <workItem from="1755196886524" duration="20414000" />
     </task>
     <task id="LOCAL-00001" summary="Component">
       <option name="closed" value="true" />
@@ -158,7 +169,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755241462897</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Glass effect.">
+      <option name="closed" value="true" />
+      <created>1755246349240</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1755246349240</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -174,6 +193,7 @@
     <MESSAGE value="Update input component" />
     <MESSAGE value="Create ChatContainer.tsx" />
     <MESSAGE value="Editing Chatting UI" />
-    <option name="LAST_COMMIT_MESSAGE" value="Editing Chatting UI" />
+    <MESSAGE value="Glass effect." />
+    <option name="LAST_COMMIT_MESSAGE" value="Glass effect." />
   </component>
 </project>

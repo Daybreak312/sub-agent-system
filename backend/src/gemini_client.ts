@@ -3,6 +3,7 @@
 
 import {GoogleGenAI} from '@google/genai';
 import dotenv from 'dotenv';
+import log from './utils/logger.js';
 
 let genAI: GoogleGenAI;
 
@@ -10,19 +11,19 @@ let genAI: GoogleGenAI;
  * Gemini 클라이언트를 초기화하는 비동기 함수.
  */
 export async function initializeGeminiClient() {
-    console.log('[GeminiClient] Initializing...');
     try {
         dotenv.config();
         const apiKey = process.env.GEMINI_API_KEY;
         if (!apiKey) {
-            throw new Error("GEMINI_API_KEY not found in .env file");
+            const errorMsg = "GEMINI_API_KEY environment variable is not set";
+            log.error(errorMsg, 'SYSTEM');
+            throw new Error(errorMsg);
         }
 
         genAI = new GoogleGenAI({apiKey});
-
-        console.log('[GeminiClient] Initialization successful.');
+        log.info('Gemini Client 초기화 완료', 'SYSTEM');
     } catch (error) {
-        console.error("[GeminiClient] CRITICAL: Failed to initialize Gemini Client.");
+        log.error("Gemini Client 초기화 실패", 'SYSTEM', {error});
         throw error;
     }
 }
@@ -34,25 +35,27 @@ export async function initializeGeminiClient() {
  * @returns 생성된 텍스트 문자열
  */
 export async function generateText(prompt: string, modelName: string = "gemini-2.5-flash"): Promise<string> {
-    if (!genAI) {
-        throw new Error("Gemini Client not initialized. Please call initializeGeminiClient() first.");
-    }
-
     try {
-        console.log(`[GeminiClient] Generating text with model ${modelName}...`);
-
-        const response = await genAI.models.generateContent({
-            model: modelName,
-            contents: [{role: "user", parts: [{text: prompt}]}],
-        });
-
-        const text = response.text;
-
-        if (!text) {
-            throw new Error("No text generated from Gemini API.");
+        if (!genAI) {
+            const errorMsg = "Gemini Client가 초기화되지 않았습니다";
+            log.error(errorMsg, 'SYSTEM');
+            throw new Error(errorMsg);
         }
 
-        console.log('[GeminiClient] Text generated successfully.');
+        log.debug('텍스트 생성 요청', 'SYSTEM', {modelName, promptLength: prompt.length});
+        const text = (await genAI.models.generateContent({
+            model: modelName,
+            contents: [{role: "user", parts: [{text: prompt}]}],
+        })).text;
+
+        if (!text) {
+            throw new Error("No text generated");
+        }
+
+        log.debug('텍스트 생성 완료', 'SYSTEM', {
+            modelName,
+            responseLength: text.length
+        });
 
         if (text.startsWith("```json") && text.endsWith("```")) {
             // Remove JSON code block formatting if present
@@ -65,7 +68,7 @@ export async function generateText(prompt: string, modelName: string = "gemini-2
 
         return text;
     } catch (error) {
-        console.error(`[GeminiClient] Error generating text with model ${modelName}:`, error);
-        throw new Error('Failed to generate text from Gemini API');
+        log.error('텍스트 생성 실패', 'SYSTEM', {error, modelName});
+        throw error;
     }
 }
