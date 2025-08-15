@@ -1,16 +1,16 @@
-import {AgentTask, AgentResult, AgentChainPlan, FinalOutput, AgentChainLogEntry} from '../types.js';
-import {AgentRegistry} from './AgentRegistry.js';
-import {generateText} from '../gemini_client.js';
-import {json} from '../utils/json.js';
+import { AgentTask, AgentResult, AgentChainPlan, FinalOutput, AgentChainLogEntry } from '../types.js';
+import { AgentRegistry } from './AgentRegistry.js';
+import { generateText } from '../gemini_client.js';
+import { json } from '../utils/json.js';
+import { getFinalAnswerPrompt } from './PromptFatory.js';
 import log from '../utils/logger.js';
-import {ConversationHistory} from './ConversationHistory.js';
+import { ConversationHistory } from './ConversationHistory.js';
 
 export class ChainExecutor {
     constructor(
         private agentRegistry: AgentRegistry,
         private history: ConversationHistory
-    ) {
-    }
+    ) {}
 
     async execute(userPrompt: string, plan: AgentChainPlan): Promise<FinalOutput> {
         log.info('Phase 2: 에이전트 체인 실행 시작...', 'SYSTEM');
@@ -107,26 +107,9 @@ export class ChainExecutor {
     private async generateFinalAnswer(userPrompt: string, results: AgentResult[]): Promise<FinalOutput> {
         log.info('최종 답변 종합 시작...', 'SYSTEM');
 
-        const synthesis_prompt = `
-            당신은 마스터 오케스트레이터입니다.
-            아래는 사용자의 요청을 처리하기 위해 실행한 에이전트 체인의 결과입니다.
-            이 모든 결과를 종합하여, 사용자를 위한 최종적이고 통합된 ���변을 아래 JSON 형식에 맞추어 생성해주세요.
-
-            --- 사용자의 요청 ---
-            "${userPrompt}"
-        
-            --- 답변 형식 ---
-            {
-                "final_user_answer": string // 최종 답변",
-                "final_answer_summary": "최종 답변의 핵심 요약을 5줄로 작성"
-            }
-
-            --- 에이전트 실행 결과 ---
-            ${json.stringify({results}, '체인 결과')}
-        `;
-
+        const finalPrompt = getFinalAnswerPrompt(userPrompt, results);
         const finalAnswer = json.parse<FinalOutput>(
-            await generateText(synthesis_prompt),
+            await generateText(finalPrompt),
             '최종 답변'
         );
 

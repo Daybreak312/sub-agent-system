@@ -4,18 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5c0ae863-ce43-4103-99f7-d27d8e8ab27c" name="Changes" comment="Error logging system.">
-      <change afterPath="$PROJECT_DIR$/backend/src/agents/AgentRegistry.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/agents/ChainExecutor.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/agents/ChainPlanner.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/agents/ConversationHistory.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/agents/MainRunner.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/agents/SubAgentProcess.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/agents/types.ts" afterDir="false" />
+    <list default="true" id="5c0ae863-ce43-4103-99f7-d27d8e8ab27c" name="Changes" comment="Main runner modulization.">
+      <change afterPath="$PROJECT_DIR$/backend/src/agents/PromptFatory.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/agents.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/agents.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main_runner.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/server.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/agents/ChainExecutor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/agents/ChainExecutor.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/agents/ChainPlanner.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/agents/ChainPlanner.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/agents/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/agents/types.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/sub_agent_process.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/sub_agent_process.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -70,6 +64,8 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/backend/src/agents/" />
+      <recent name="$PROJECT_DIR$/backend/src/utils" />
       <recent name="$PROJECT_DIR$/" />
       <recent name="$PROJECT_DIR$" />
     </key>
@@ -89,7 +85,7 @@
       <option name="presentableId" value="Default" />
       <updated>1755175959307</updated>
       <workItem from="1755175960364" duration="18238000" />
-      <workItem from="1755196886524" duration="23951000" />
+      <workItem from="1755196886524" duration="26266000" />
     </task>
     <task id="LOCAL-00001" summary="Component">
       <option name="closed" value="true" />
@@ -243,7 +239,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755251246541</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Main runner modulization.">
+      <option name="closed" value="true" />
+      <created>1755252976305</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1755252976305</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -263,6 +267,7 @@
     <MESSAGE value="Add logging system and error resolve system." />
     <MESSAGE value="gitignore" />
     <MESSAGE value="Error logging system." />
-    <option name="LAST_COMMIT_MESSAGE" value="Error logging system." />
+    <MESSAGE value="Main runner modulization." />
+    <option name="LAST_COMMIT_MESSAGE" value="Main runner modulization." />
   </component>
 </project>
