@@ -1,6 +1,6 @@
 import {AgentChainPlan} from '../../application/types.js';
 import {AgentRegistry} from '../../infra/mcp/AgentRegistry.js';
-import {generateText} from '../../infra/mcp/GeminiClient.js';
+import {generateText} from '../../infra/mcp/impl/GeminiClient.js';
 import {jsonUtils} from '../../infra/utils/JsonUtils.js';
 import {getPlanPrompt} from '../../infra/utils/PromptFatory.js';
 import log from '../../infra/utils/Logger.js';

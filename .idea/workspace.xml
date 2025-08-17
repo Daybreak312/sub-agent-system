@@ -4,33 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5c0ae863-ce43-4103-99f7-d27d8e8ab27c" name="Changes" comment="Add logo.">
-      <change afterPath="$PROJECT_DIR$/backend/src/infra/mcp/AgentsConfig.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/infra/mcp/McpClient.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/infra/utils/PathUtils.ts" afterDir="false" />
+    <list default="true" id="5c0ae863-ce43-4103-99f7-d27d8e8ab27c" name="Changes" comment="Refact JsonUtils.ts">
+      <change afterPath="$PROJECT_DIR$/backend/src/infra/mcp/impl/GeminiClient.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/GEMINI.md" beforeDir="false" afterPath="$PROJECT_DIR$/backend/GEMINI.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/backend/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/agents.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/agents.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/agents/AgentRegistry.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/infra/mcp/AgentRegistry.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/agents/ChainExecutor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/domain/agents/ChainExecutor.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/agents/ChainPlanner.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/domain/agents/ChainPlanner.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/agents/ConversationHistory.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/domain/agents/ConversationHistory.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/agents/MainRunner.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/domain/agents/MainRunner.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/agents/PromptFatory.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/infra/utils/PromptFatory.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/agents/SubAgentProcess.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/domain/agents/SubAgentProcess.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/agents/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/domain/agents/types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/errors/AppError.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/infra/errors/AppError.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/gemini_client.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/infra/mcp/GeminiClient.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/middleware/errorHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/infra/errors/ErrorHandler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/application/Server.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/application/Server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/application/Server.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/domain/agents/ChainExecutor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/domain/agents/ChainExecutor.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/domain/agents/ChainPlanner.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/domain/agents/ChainPlanner.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/infra/mcp/AgentRegistry.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/infra/mcp/AgentRegistry.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/infra/mcp/AgentsConfig.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/infra/mcp/AgentsConfig.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/infra/mcp/GeminiClient.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/infra/mcp/McpClient.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/infra/mcp/McpClient.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/infra/mcp/SubAgent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/infra/mcp/Agent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/infra/utils/PathUtils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/infra/utils/PathUtils.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/sub_agent_process.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/sub_agent_process.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/application/types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/utils/json.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/infra/utils/JsonUtils.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/utils/logger.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/infra/utils/Logger.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/ChatPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/ChatPage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +73,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "settings.editor.selected.configurable": "preferences.keymap",
     "ts.external.directory.path": "/Users/daybreak312/gemini/agent/backend/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
@@ -97,11 +83,11 @@
       <recent name="$PROJECT_DIR$/frontend/public" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/backend/src/infra/mcp/impl" />
       <recent name="$PROJECT_DIR$/backend/src/infra/mcp" />
       <recent name="$PROJECT_DIR$/backend/src/application" />
       <recent name="$PROJECT_DIR$/backend/src/infra/utils" />
       <recent name="$PROJECT_DIR$/backend/src/infra" />
-      <recent name="$PROJECT_DIR$/backend/src/domain" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -119,7 +105,9 @@
       <option name="presentableId" value="Default" />
       <updated>1755175959307</updated>
       <workItem from="1755175960364" duration="18238000" />
-      <workItem from="1755196886524" duration="44279000" />
+      <workItem from="1755196886524" duration="54004000" />
+      <workItem from="1755361000376" duration="3000" />
+      <workItem from="1755410432293" duration="2365000" />
     </task>
     <task id="LOCAL-00001" summary="Component">
       <option name="closed" value="true" />
@@ -321,7 +309,31 @@
       <option name="project" value="LOCAL" />
       <updated>1755271934912</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Move directory (Need fix)">
+      <option name="closed" value="true" />
+      <created>1755283425562</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1755283425562</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Add utility for managing agents.">
+      <option name="closed" value="true" />
+      <created>1755283529167</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1755283529167</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Refact JsonUtils.ts">
+      <option name="closed" value="true" />
+      <created>1755284798619</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1755284798619</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -347,6 +359,9 @@
     <MESSAGE value="Refact socket logic" />
     <MESSAGE value="Page" />
     <MESSAGE value="Add logo." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add logo." />
+    <MESSAGE value="Move directory (Need fix)" />
+    <MESSAGE value="Add utility for managing agents." />
+    <MESSAGE value="Refact JsonUtils.ts" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refact JsonUtils.ts" />
   </component>
 </project>

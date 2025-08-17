@@ -1,6 +1,6 @@
 import {fileURLToPath} from "url";
 import path from "path";
-import {AgentInfo} from "../mcp/AgentsConfig.js";
+import {AgentConfig} from "../mcp/AgentsConfig.js";
 
 const CONTEXTS_FOLDER_NAME = "contexts";
 
@@ -18,7 +18,7 @@ export function rootPath(...p: string[]): string {
     return rootPathCache;
 }
 
-export function contextFilePathByInfo(agent: AgentInfo): string {
+export function contextFilePathByInfo(agent: AgentConfig): string {
     return contextFilePathById(agent.id);
 }
 

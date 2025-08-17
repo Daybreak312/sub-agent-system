@@ -3,7 +3,7 @@
 import path from 'path';
 import fs from 'fs';
 import {fileURLToPath} from 'url';
-import {generateText, initializeGeminiClient} from './infra/mcp/GeminiClient.js';
+import {generateText, initializeGeminiClient} from './infra/mcp/impl/GeminiClient.js';
 import type {AgentTask, AgentResult} from './application/types.js';
 import {getTaskPrompt} from './infra/utils/PromptFatory.js';
 import log from './infra/utils/Logger.js';

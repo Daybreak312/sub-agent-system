@@ -9,7 +9,7 @@ import cors from 'cors';
 import {WebSocket, WebSocketServer} from 'ws';
 import {errorHandler} from '../infra/errors/ErrorHandler.js';
 import {BadRequestError} from '../infra/errors/AppError.js';
-import {initializeGeminiClient} from "../infra/mcp/GeminiClient.js";
+import {initializeGeminiClient} from "../infra/mcp/impl/GeminiClient.js";
 import {MainRunner} from '../domain/agents/MainRunner.js';
 import log from '../infra/utils/Logger.js';
 
