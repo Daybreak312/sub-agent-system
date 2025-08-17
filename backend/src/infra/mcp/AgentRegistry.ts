@@ -9,15 +9,26 @@ import {Agent} from "./Agent.js";
 export class AgentRegistry {
     private readonly agents = new Map<string, Agent>();
 
-    register(agentId: string, info: Agent): void {
-        if (agentId != info.id) {
+    /**
+     * 에이전트를 레지스트리에 확보합니다.
+     *
+     * @param agentId {@linkcode Agent.id}
+     * @param agent {@linkcode Agent}
+     */
+    register(agentId: string, agent: Agent): void {
+        if (agentId != agent.id) {
             throw new Error("Agent ID mismatch on registering.")
         }
 
-        this.agents.set(agentId, info);
+        this.agents.set(agentId, agent);
         log.info(`Registered agent: ${agentId}`, 'AGENT');
     }
 
+    /**
+     * 에이전트 아이디를 기반으로 레지스트리에서 에이전트를 불러옵니다.
+     *
+     * @param agentId {@linkcode Agent.id}
+     */
     get(agentId: string): Agent {
         const agent = this.agents.get(agentId);
         if (!agent) {
@@ -26,6 +37,9 @@ export class AgentRegistry {
         return agent;
     }
 
+    /**
+     * 모든 에이전트를 불러옵니다.
+     */
     getAllAgents(): Array<[string, Agent]> {
         if (this.agents.size === 0) {
             throw new NotFoundError('No agents registered');
@@ -33,6 +47,9 @@ export class AgentRegistry {
         return Array.from(this.agents.entries());
     }
 
+    /**
+     * 사용 가능한 에이전트들의 정보를 불러옵니다.
+     */
     getAvailableAgents(): Array<{ id: string; description: string }> {
         return this.getAllAgents().map(([_, data]) => ({
             id: data.id,
@@ -40,6 +57,11 @@ export class AgentRegistry {
         }));
     }
 
+    /**
+     * 에이전트 아이디를 기반으로 레지스트리에서 에이전트를 제거합니다.
+     *
+     * @param agentId {@linkcode Agent.id}
+     */
     remove(agentId: string): void {
         this.agents.delete(agentId);
         log.info(`에이전트 제거: ${agentId}`, 'AGENT');

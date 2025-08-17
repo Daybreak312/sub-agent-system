@@ -4,19 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5c0ae863-ce43-4103-99f7-d27d8e8ab27c" name="Changes" comment="Refact JsonUtils.ts">
-      <change afterPath="$PROJECT_DIR$/backend/src/infra/mcp/impl/GeminiClient.ts" afterDir="false" />
+    <list default="true" id="5c0ae863-ce43-4103-99f7-d27d8e8ab27c" name="Changes" comment="Refactoring Agent and McpClient API.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/application/Server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/application/Server.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/domain/agents/ChainExecutor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/domain/agents/ChainExecutor.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/domain/agents/ChainPlanner.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/domain/agents/ChainPlanner.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/infra/mcp/Agent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/infra/mcp/Agent.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/infra/mcp/AgentRegistry.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/infra/mcp/AgentRegistry.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/infra/mcp/AgentsConfig.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/infra/mcp/AgentsConfig.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/infra/mcp/GeminiClient.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/infra/mcp/McpClient.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/infra/mcp/McpClient.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/infra/mcp/SubAgent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/infra/mcp/Agent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/infra/utils/PathUtils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/infra/utils/PathUtils.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/sub_agent_process.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/sub_agent_process.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +99,7 @@
       <workItem from="1755175960364" duration="18238000" />
       <workItem from="1755196886524" duration="54004000" />
       <workItem from="1755361000376" duration="3000" />
-      <workItem from="1755410432293" duration="2365000" />
+      <workItem from="1755410432293" duration="3644000" />
     </task>
     <task id="LOCAL-00001" summary="Component">
       <option name="closed" value="true" />
@@ -333,7 +325,23 @@
       <option name="project" value="LOCAL" />
       <updated>1755284798619</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Add 'Lifecycle'">
+      <option name="closed" value="true" />
+      <created>1755413410640</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1755413410640</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Refactoring Agent and McpClient API.">
+      <option name="closed" value="true" />
+      <created>1755413437278</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1755413437278</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -362,6 +370,8 @@
     <MESSAGE value="Move directory (Need fix)" />
     <MESSAGE value="Add utility for managing agents." />
     <MESSAGE value="Refact JsonUtils.ts" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refact JsonUtils.ts" />
+    <MESSAGE value="Add 'Lifecycle'" />
+    <MESSAGE value="Refactoring Agent and McpClient API." />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactoring Agent and McpClient API." />
   </component>
 </project>

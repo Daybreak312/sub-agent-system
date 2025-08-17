@@ -1,7 +1,7 @@
 import {GeminiClient} from "./impl/GeminiClient.js";
 
 /**
- * 프롬프트의 구성 요소입니다.
+ * 프롬프트의 구성 요소.
  */
 export interface PromptProps {
     /**
