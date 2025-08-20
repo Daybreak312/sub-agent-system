@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "main": "dist/server.js",
+  "main": "dist/application/Server.js",
   "scripts": {
     "build": "tsc",
-    "start": "node dist/server.js",
+    "start": "node dist/application/Server.js",
     "dev": "nodemon"
   },
   "dependencies": {
@@ -30,6 +30,6 @@
     "typescript": "^5.4.5"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=20.11.0"
   }
 }

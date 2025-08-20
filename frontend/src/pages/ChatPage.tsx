@@ -50,7 +50,7 @@ export const ChatPage: React.FC = () => {
             const response = await fetch('http://localhost:3000/api/prompt', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/jsonUtils',
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({prompt: userMessage.content}),
             });

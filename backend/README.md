@@ -6,14 +6,14 @@
 사용자의 프롬프트를 받아 에이전트 체인을 실행하고 결과를 반환합니다.
 
 #### Request
-```jsonUtils
+```json
 {
   "prompt": "string"
 }
 ```
 
 #### Response
-```jsonUtils
+```json
 {
   "agent_chain_reasoning": "string",
   "agent_chain_log": [
@@ -29,7 +29,7 @@
 ```
 
 #### Error Response
-```jsonUtils
+```json
 {
   "error_code": "string",
   "message": "string",
@@ -46,7 +46,7 @@
 시스템과 모든 서브 에이전트의 상태를 확인합니다.
 
 #### Response
-```jsonUtils
+```json
 {
   "status": "ok | error",
   "agents": [
@@ -71,7 +71,7 @@
 ### agent_progress
 에이전트 체인 실행 중 각 단계의 진행 상황을 실시간으로 전송합니다.
 
-```jsonUtils
+```json
 {
   "type": "agent_progress",
   "data": {
@@ -86,7 +86,7 @@
 ### agent_error
 에이전트 실행 중 발생한 에러를 실시간으로 전송합니다.
 
-```jsonUtils
+```json
 {
   "type": "agent_error",
   "data": {
