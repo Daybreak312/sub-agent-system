@@ -37,10 +37,15 @@ export const jsonUtils = {
     }
 };
 
-function unboxingCodeBlock(text: string): string {
-    if (text.startsWith("```jsonUtils") && text.endsWith("```")) {
+function unboxingCodeBlock(text: any): string {
+    // string 타입이 아니면 그대로 반환
+    if (typeof text !== 'string') {
+        return text;
+    }
+
+    if (text.startsWith("```json") && text.endsWith("```")) {
         // Remove JSON code block formatting if present
-        return text.slice(8, -3).trim();
+        return text.slice(7, -3).trim();
     }
     if (text.startsWith("```") && text.endsWith("```")) {
         // Remove code block formatting if present

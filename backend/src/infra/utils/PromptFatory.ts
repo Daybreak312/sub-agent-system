@@ -15,7 +15,8 @@ ${JSON.stringify(availableAgents, null, 2)}
 "${userPrompt}"
 
 --- 출력 규칙 ---
-반드시 아래의 JSON 형식으로 출력해야 합니다.
+반드시 아래의 JSON 형식으로 출력해야 합니다. 단, 이 JSON 형식을 출력하기 위해 코드 블럭(\`\`\`)을 절대 사용하지 마십시오.
+이 출력은 기계적으로만 사용되므로, 가독성을 위한 공백이나 줄바꿈 처리는 필요하지 않습니다.
 
 {
   "reasoning" : string; // 이 계획을 수립한 전반적인 이유 (클라이언트 표시용)
@@ -48,6 +49,8 @@ ${task}
 ${previousOutput ? `\n\n--- 이전 단계 결과물 ---\n${previousOutput}` : ''}
 
 --- 출력 형식 규칙 ---
+단, 이 JSON 형식을 출력하기 위해 코드 블럭(\`\`\`)을 절대 사용하지 말 것.
+이 출력은 기계적으로만 사용되므로, 가독성을 위한 공백이나 줄바꿈 처리는 필요하지 않습니다.
 {
   "raw": string // 생성한 전체 답변 내용,
   "summation": string // 생성한 답변의 핵심 내용을 3줄로 요약
@@ -64,12 +67,15 @@ export const getFinalAnswerPrompt = (userPrompt: string, results: any[]): string
 "${userPrompt}"
 
 --- 답변 형식 ---
+단, 이 JSON 형식을 출력하기 위해 코드 블럭(\`\`\`)을 절대 사용하지 마십시오.
+이 출력은 기계적으로만 사용되므로, 가독성을 위한 공백이나 줄바꿈 처리는 필요하지 않습니다.
+단, JSON 표준 형식을 절대로 어기지 마십시오.
 {
     "final_user_answer": string // 최종 답변",
     "final_answer_summary": "최종 답변의 핵심 요약을 5줄로 작성"
 }
 
 --- 에이전트 실행 결과 ---
-${JSON.stringify({ results }, null, 2)}`;
+${JSON.stringify({results}, null, 2)}`;
 };
 
