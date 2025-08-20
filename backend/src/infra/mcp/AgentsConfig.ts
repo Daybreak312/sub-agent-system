@@ -39,11 +39,12 @@ let configCache: AgentsConfig | undefined = undefined;
  */
 export const getConfig = (): AgentsConfig => {
     if (!configCache) {
+        const fileName = `${rootPath()}/agents.yml`;
         try {
-            const data = fs.readFileSync(`${rootPath()}/agents.yml`, 'utf8');
+            const data = fs.readFileSync(fileName, 'utf8');
             configCache = yaml.load(data) as AgentsConfig;
         } catch (e) {
-            throw new Error("Cannot read the agent config file.");
+            throw new Error(`Cannot read the agent config file: ${fileName}`);
         }
     }
 

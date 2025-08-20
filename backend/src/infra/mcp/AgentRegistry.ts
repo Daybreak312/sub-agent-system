@@ -1,4 +1,4 @@
-import {InternalServerError, NotFoundError} from '../errors/AppError.js';
+import {NotFoundError} from '../errors/AppError.js';
 import log from '../utils/Logger.js';
 import {Agent} from "./Agent.js";
 
