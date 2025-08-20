@@ -1,6 +1,6 @@
 import {WebSocket, WebSocketServer} from 'ws';
 import {Server} from 'http';
-import {NotificationService} from '../abstractions/NotificationService.js';
+import {NotificationService} from '../NotificationService.js';
 import log from '../../utils/Logger.js';
 
 export class WebSocketNotificationService implements NotificationService {

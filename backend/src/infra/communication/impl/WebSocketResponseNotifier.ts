@@ -1,47 +1,33 @@
-import { ResponseNotifier } from '../abstractions/ResponseNotifier.js';
-import { NotificationService } from '../abstractions/NotificationService.js';
-import { NotificationEventBuilder } from '../models/NotificationEvent.js';
+import {ResponseNotifier} from '../ResponseNotifier.js';
+import {NotificationService} from '../NotificationService.js';
+import {NotificationEventBuilder} from '../models/NotificationEvent.js';
 import log from '../../utils/Logger.js';
+import {Client} from "../models/Client.js";
 
 export class WebSocketResponseNotifier<T> implements ResponseNotifier<T> {
-    constructor(private notificationService: NotificationService) {}
+    constructor(private notificationService: NotificationService) {
+    }
 
-    async notify(data: T, eventType: string = 'custom'): Promise<void> {
+    async notify(data: T, client: Client): Promise<void> {
         try {
-            const event = {
-                type: eventType,
-                data,
-                timestamp: new Date()
-            };
+            const event = NotificationEventBuilder.of(data).setClient(client).build();
 
             await this.notificationService.broadcast(event);
-            log.debug('응답 알림 전송 완료', 'NOTIFIER', { eventType });
+            log.debug('응답 알림 전송 완료', 'NOTIFIER');
         } catch (error) {
-            log.error('응답 알림 전송 실패', 'NOTIFIER', { eventType, error });
+            log.error('응답 알림 전송 실패', 'NOTIFIER');
             throw error;
         }
     }
 
-    async notifyProgress(data: T): Promise<void> {
-        const event = NotificationEventBuilder.progress(data).build();
-        await this.notificationService.broadcast(event);
-        log.debug('진행상황 알림 전송', 'NOTIFIER');
-    }
-
-    async notifyComplete(data: T): Promise<void> {
-        const event = NotificationEventBuilder.complete(data).build();
-        await this.notificationService.broadcast(event);
-        log.debug('완료 알림 전송', 'NOTIFIER');
-    }
-
     async notifyError(error: Error): Promise<void> {
-        const event = NotificationEventBuilder.error({
+        const event = NotificationEventBuilder.of({
             message: error.message,
             stack: error.stack,
             name: error.name
         }).build();
 
         await this.notificationService.broadcast(event);
-        log.debug('에러 알림 전송', 'NOTIFIER', { error: error.message });
+        log.debug('에러 알림 전송', 'NOTIFIER', {error: error.message});
     }
 }

@@ -1,9 +1,10 @@
 // 알림 이벤트 모델
+import {Client} from "./Client.js";
+
 export interface NotificationEvent<T = any> {
-    type: 'progress' | 'complete' | 'error' | 'custom';
     data: T;
     timestamp: Date;
-    eventId?: string;
+    client: Client;
 }
 
 export class NotificationEventBuilder<T> {
@@ -11,21 +12,8 @@ export class NotificationEventBuilder<T> {
         timestamp: new Date()
     };
 
-    static progress<T>(data: T): NotificationEventBuilder<T> {
-        return new NotificationEventBuilder<T>().setType('progress').setData(data);
-    }
-
-    static complete<T>(data: T): NotificationEventBuilder<T> {
-        return new NotificationEventBuilder<T>().setType('complete').setData(data);
-    }
-
-    static error<T>(data: T): NotificationEventBuilder<T> {
-        return new NotificationEventBuilder<T>().setType('error').setData(data);
-    }
-
-    private setType(type: NotificationEvent<T>['type']): this {
-        this.event.type = type;
-        return this;
+    static of<T>(data: T): NotificationEventBuilder<T> {
+        return new NotificationEventBuilder<T>().setData(data);
     }
 
     private setData(data: T): this {
@@ -33,8 +21,8 @@ export class NotificationEventBuilder<T> {
         return this;
     }
 
-    setEventId(eventId: string): this {
-        this.event.eventId = eventId;
+    setClient(client: Client): this {
+        this.event.client = client;
         return this;
     }
 
