@@ -1,21 +1,27 @@
-import {fileURLToPath} from "url";
 import path from "path";
 import {AgentConfig} from "../mcp/AgentsConfig.js";
+import fs from "fs";
 
 const CONTEXTS_FOLDER_NAME = "contexts";
+const MARKER_FILE = ".root-marker"
 
 let rootPathCache: string | undefined;
 
 export function rootPath(...p: string[]): string {
-    if (!rootPathCache) {
-        const filename = fileURLToPath(import.meta.filename);
-        rootPathCache = filename.split("/src")[0];
-    }
 
-    if (p) {
+    if (rootPathCache) {
         return path.join(rootPathCache, ...p);
     }
-    return rootPathCache;
+
+    let currentDir = import.meta.dirname;
+
+    while (!fs.existsSync(path.join(currentDir, MARKER_FILE))) {
+        currentDir = path.dirname(currentDir);
+    }
+
+    rootPathCache = currentDir;
+
+    return path.join(rootPathCache, ...p);
 }
 
 export function contextFilePathByInfo(agent: AgentConfig): string {
