@@ -1,6 +1,3 @@
-// Response VO 추상화 - 비즈니스 로직에서 통신 방식을 알 필요 없도록 함
-import {Client} from "./models/Client.js";
-
 export interface ResponseNotifier<T> {
     /**
      * 응답 데이터를 클라이언트에게 전송

@@ -2,18 +2,17 @@ import {ResponseNotifier} from '../ResponseNotifier.js';
 import {NotificationService} from '../NotificationService.js';
 import {NotificationEventBuilder} from '../models/NotificationEvent.js';
 import log from '../../utils/Logger.js';
-import {Client} from "../models/Client.js";
 
 export class WebSocketResponseNotifier<T> implements ResponseNotifier<T> {
     constructor(
         private readonly notificationService: NotificationService,
-        private readonly client: Client
+        private readonly requestId: string
     ) {
     }
 
     async notify(data: T): Promise<void> {
         try {
-            const event = NotificationEventBuilder.of(data).setClient(this.client).build();
+            const event = NotificationEventBuilder.of(data).setRequestId(this.requestId).build();
 
             await this.notificationService.broadcast(event);
             log.debug('응답 알림 전송 완료', 'NOTIFIER');

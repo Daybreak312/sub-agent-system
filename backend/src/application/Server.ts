@@ -10,7 +10,7 @@ import {errorHandler} from '../infra/errors/ErrorHandler.js';
 import {BadRequestError} from '../infra/errors/AppError.js';
 import {GeminiClient} from '../infra/mcp/impl/GeminiClient.js';
 import {MainRunner} from '../domain/agents/MainRunner.js';
-import {Client, WebSocketNotificationService} from '../infra/communication/index.js';
+import {WebSocketNotificationService} from '../infra/communication/index.js';
 import {WebSocketResponseNotifier} from '../infra/communication/index.js';
 import log from '../infra/utils/Logger.js';
 import {randomUUID} from "node:crypto";
@@ -45,14 +45,14 @@ app.post('/api/prompt', async (req, res, next) => {
             throw new BadRequestError(`Prompt is required.`);
         }
 
-        const clientId: string = randomUUID();
+        const requestId: string = randomUUID();
 
         const result = await mainRunner.handleUserPrompt(
             prompt,
-            new WebSocketResponseNotifier(notificationService, new Client(clientId))
+            new WebSocketResponseNotifier(notificationService, requestId)
         );
         log.info('프롬프트 처리 완료', 'API', {prompt});
-        res.setHeader("client-id", randomUUID());
+        res.setHeader("request-id", requestId);
         res.json(result);
     } catch (error) {
         next(error);

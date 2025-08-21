@@ -5,5 +5,4 @@ export {NotificationService} from './NotificationService.js';
 export {WebSocketNotificationService} from './impl/WebSocketNotificationService.js';
 export {WebSocketResponseNotifier} from './impl/WebSocketResponseNotifier.js';
 
-export {Client} from './models/Client.js';
 export {NotificationEvent, NotificationEventBuilder} from './models/NotificationEvent.js';

@@ -1,10 +1,7 @@
-// 알림 이벤트 모델
-import {Client} from "./Client.js";
-
 export interface NotificationEvent<T = any> {
     data: T;
     timestamp: Date;
-    client: Client;
+    requestId: string;
 }
 
 export class NotificationEventBuilder<T> {
@@ -21,8 +18,8 @@ export class NotificationEventBuilder<T> {
         return this;
     }
 
-    setClient(client: Client): this {
-        this.event.client = client;
+    setRequestId(id: string): this {
+        this.event.requestId = id;
         return this;
     }
 
