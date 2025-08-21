@@ -1,7 +1,6 @@
 import {AgentChainPlan, AgentResult, AgentTask, FinalOutput} from '../../application/types.js';
 import {AgentRegistry} from '../../infra/mcp/AgentRegistry.js';
 import {GeminiClient} from '../../infra/mcp/impl/GeminiClient.js';
-import {jsonUtils} from '../../infra/utils/JsonUtils.js';
 import {PromptFactory} from '../../infra/utils/PromptFatory.js';
 import log from '../../infra/utils/Logger.js';
 import {ConversationHistory} from './ConversationHistory.js';
@@ -44,7 +43,7 @@ export class ChainExecutor {
             for (const step of plan.steps) {
                 const stepResults = await this.executeStep(step, lastStepFullOutput, output, responseNotifier);
                 agentChainResults.push(...stepResults);
-                lastStepFullOutput = stepResults.map(r => r.raw).join('\n\n---\n\n');
+                lastStepFullOutput += "\n\n---\n\n" + stepResults.map(r => r.raw).join('\n\n---\n\n');
                 await responseNotifier.notify(output);
             }
         }
@@ -53,8 +52,7 @@ export class ChainExecutor {
         const finalAnswer = await this.generateFinalAnswer(userPrompt, agentChainResults);
 
         // 최종 결과 업데이트
-        output.final_user_answer = finalAnswer.final_user_answer;
-        output.final_answer_summary = finalAnswer.final_answer_summary;
+        output.final_user_answer = finalAnswer;
         output.is_complete = true;
 
         await responseNotifier.notify(output);
@@ -132,17 +130,12 @@ export class ChainExecutor {
         }
     }
 
-    private async generateFinalAnswer(userPrompt: string, results: AgentResult[]): Promise<FinalOutput> {
+    private async generateFinalAnswer(userPrompt: string, results: AgentResult[]): Promise<string> {
         log.info('최종 답변 종합 시작...', 'SYSTEM');
 
         const finalPrompt = PromptFactory.finalAnswerPrompt(userPrompt, results);
-        const generatedText = await this.geminiClient.sendPrompt({
+        return await this.geminiClient.sendPrompt({
             prompt: finalPrompt
         });
-
-        return jsonUtils.parse<FinalOutput>(
-            generatedText,
-            '최종 답변'
-        );
     }
 }

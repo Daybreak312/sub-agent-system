@@ -1,7 +1,6 @@
 import {Agent, AgentProps, AgentResult} from "../Agent.js";
 import {PromptProps} from "../McpClient.js";
 import {GeminiClient} from "./GeminiClient.js";
-import {jsonUtils} from "../../utils/JsonUtils.js";
 
 export class GeminiAgent implements Agent {
     description: string;
@@ -25,7 +24,12 @@ export class GeminiAgent implements Agent {
         props.prompt.withSystemPrompt(this.systemPrompt)
         const result = await this.client.sendPrompt(props);
 
-        return jsonUtils.parse(result, "Parsing agent's result");
+        const split = result.split("\uE000");
+
+        return {
+            raw: split[0],
+            summation: split[1]
+        }
     }
 
     async finalize(): Promise<void> {

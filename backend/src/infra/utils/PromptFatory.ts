@@ -20,15 +20,12 @@ export const PLAN_OUTPUT_FORMAT = `{
   ]
 }`
 
-export const AGENT_OUTPUT_FORMAT = `{
-  "raw": string // 생성한 전체 답변 내��
-  "summation": string // 생성한 답변의 핵심 내용을 3줄로 요약
-}`
+export const AGENT_OUTPUT_FORMAT = `
+{생성한 전체 답변 내용}
+\uE000
+{생성한 전체 답변 내용에 대한 세 줄 요약}
 
-export const FINAL_OUTPUT_FORMAT = `{
-    "final_user_answer": string // 최종 답변"
-    "final_answer_summary": "최종 답변의 핵심 요약을 5줄로 작성"
-}`
+// 단, '생성한 전체 답변 내용' 등의 문자를 실제로 출력하지는 말 것.`
 
 
 export class PromptBuilder {
@@ -59,14 +56,6 @@ ${task}`;
         return this;
     }
 
-    withPreviousOutput(previousOutput: string) {
-        this.finalPrompt +=
-            `
---- 이전 단계 결과물 ---
-${previousOutput}`;
-        return this;
-    }
-
     withContexts(contexts: string[]) {
         this.finalPrompt +=
             `
@@ -79,17 +68,9 @@ ${contexts.join('\n\n---\n\n')}`;
         this.finalPrompt +=
             `
 --- 출력 형식 규칙 ---
-반드시 아래의 형식으로 출력해야 합니다. 
-
-**중요: JSON 출력 시 다음 특수 구분자를 사용하세요:**
-- 시작: \x02 (보이지 않는 제어문자)
-- 종료: \x03 (보이지 않는 제어문자)
-
-예시: \x02{"type": "result", "data": "내용"}\x03
-
-이 방식을 사용하면 JSON 파싱 오류를 방지할 수 있습니다.
+반드시 아래의 형식으로 출력해야 합니다. 단, 이 형식을 출력하기 위해 코드 블럭(\`\`\`)을 절대 사용하지 마십시오.
+이 출력 규칙은 MCP와 유사한 프로토콜에서 사용되는 규칙입니다.
 각 값을 절대로 누락하지 마세요.
-
 ${format}`;
         return this;
     }
@@ -146,12 +127,11 @@ export class PromptFactory {
             .withTask(
                 `당신은 마스터 오케스트레이터입니다.
 아래는 사용자의 요청을 처리하기 위해 실행한 에이전트 체인의 결과입니다.
-이 모든 결과를 종합하여, 사용자를 위한 최종적이고 통합된 답변을 아래 JSON 형식에 맞추어 생성해주세요.`)
+이 모든 결과를 종합하여, 사용자를 위한 최종적이고 통합된 답변을 생성해주세요.`)
             .withRequest(userPrompt)
             .withCustomSection(
                 "에이전트 실행 결과",
                 JSON.stringify({results}, null, 2)
             )
-            .withOutputFormat(FINAL_OUTPUT_FORMAT);
     }
 }

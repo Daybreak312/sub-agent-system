@@ -45,12 +45,16 @@ export class GeminiClient implements McpClient {
 
         try {
 
+            console.log(props.prompt.build())
+
             const text = (await genAI.models.generateContent({
                 model: modelName,
                 contents: {
                     text: props.prompt.build()
                 }
             })).text;
+
+            console.log(text);
 
             if (!text) {
                 throw new Error("No text generated");
