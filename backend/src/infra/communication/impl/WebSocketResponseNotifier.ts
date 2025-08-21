@@ -5,12 +5,15 @@ import log from '../../utils/Logger.js';
 import {Client} from "../models/Client.js";
 
 export class WebSocketResponseNotifier<T> implements ResponseNotifier<T> {
-    constructor(private notificationService: NotificationService) {
+    constructor(
+        private readonly notificationService: NotificationService,
+        private readonly client: Client
+    ) {
     }
 
-    async notify(data: T, client: Client): Promise<void> {
+    async notify(data: T): Promise<void> {
         try {
-            const event = NotificationEventBuilder.of(data).setClient(client).build();
+            const event = NotificationEventBuilder.of(data).setClient(this.client).build();
 
             await this.notificationService.broadcast(event);
             log.debug('응답 알림 전송 완료', 'NOTIFIER');

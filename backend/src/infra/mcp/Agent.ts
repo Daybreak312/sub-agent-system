@@ -40,5 +40,5 @@ export interface AgentResult {
     /**
      * 답변의 요약.
      */
-    summary: string
+    summation: string
 }

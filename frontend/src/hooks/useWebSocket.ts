@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import {useEffect, useRef, useState} from 'react';
 
 interface ProgressMessage {
-    type: 'progress_update';
     data: any;
+    timestamp: string;
 }
 
 export const useWebSocket = () => {
@@ -30,9 +30,8 @@ export const useWebSocket = () => {
             wsRef.current.onmessage = (event) => {
                 try {
                     const message = JSON.parse(event.data) as ProgressMessage;
-                    if (message.type === 'progress_update') {
-                        setProgress(message.data);
-                    }
+                    console.log('WebSocket 메시지 수신:', message);
+                    setProgress(message.data);
                 } catch (error) {
                     console.error('Failed to parse WebSocket message:', error);
                 }

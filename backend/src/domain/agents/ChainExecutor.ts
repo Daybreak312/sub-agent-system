@@ -1,58 +1,52 @@
-import { AgentTask, AgentResult, AgentChainPlan, FinalOutput, AgentChainLogEntry } from '../../application/types.js';
-import { AgentRegistry } from '../../infra/mcp/AgentRegistry.js';
-import { generateText } from '../../infra/mcp/impl/GeminiClient.js';
-import { jsonUtils } from '../../infra/utils/JsonUtils.js';
-import { getFinalAnswerPrompt } from '../../infra/utils/PromptFatory.js';
+import {AgentChainPlan, AgentResult, AgentTask, FinalOutput} from '../../application/types.js';
+import {AgentRegistry} from '../../infra/mcp/AgentRegistry.js';
+import {GeminiClient} from '../../infra/mcp/impl/GeminiClient.js';
+import {jsonUtils} from '../../infra/utils/JsonUtils.js';
+import {PromptFactory} from '../../infra/utils/PromptFatory.js';
 import log from '../../infra/utils/Logger.js';
-import { ConversationHistory } from './ConversationHistory.js';
-import EventEmitter from 'events';
+import {ConversationHistory} from './ConversationHistory.js';
+import {ResponseNotifier} from '../../infra/communication/index.js';
 
 export class ChainExecutor {
-    private eventEmitter: EventEmitter;
+    private geminiClient: GeminiClient;
 
     constructor(
         private agentRegistry: AgentRegistry,
         private history: ConversationHistory
     ) {
-        this.eventEmitter = new EventEmitter();
+        this.geminiClient = GeminiClient.getInstance();
     }
 
-    onProgressUpdate(callback: (output: FinalOutput) => void) {
-        this.eventEmitter.on('progress', callback);
-    }
-
-    private emitProgress(output: FinalOutput) {
-        this.eventEmitter.emit('progress', output);
-    }
-
-    async execute(userPrompt: string, plan: AgentChainPlan): Promise<FinalOutput> {
+    async execute(userPrompt: string, plan: AgentChainPlan, responseNotifier: ResponseNotifier<FinalOutput>): Promise<FinalOutput> {
         log.info('Phase 2: 에이전트 체인 실행 시작...', 'SYSTEM');
 
         // 초기 상태 생성 - 모든 에이전트의 기본 정보를 포함
-        const initialLogs = plan.steps.flatMap(step =>
+        const initialLogs = plan.steps ? plan.steps.flatMap(step =>
             step.calls.map(call => ({
-                agent_name: this.agentRegistry.get(call.agent_id).config.name,
+                agent_name: this.agentRegistry.get(call.agent_id).name,
                 reasoning: call.reasoning,
                 summation: ''  // 실행 전이므로 빈 문자열
             }))
-        );
+        ) : [];
 
         const output: FinalOutput = {
             agent_chain_reasoning: plan.reasoning,
             agent_chain_log: initialLogs,
             is_complete: false
         };
-        this.emitProgress(output);
+        await responseNotifier.notify(output);
 
         const agentChainResults: AgentResult[] = [];
         let lastStepFullOutput: string = "";
 
-        // 각 단계별 실행
-        for (const step of plan.steps) {
-            const stepResults = await this.executeStep(step, lastStepFullOutput, output.agent_chain_log);
-            agentChainResults.push(...stepResults);
-            lastStepFullOutput = stepResults.map(r => r.raw).join('\n\n---\n\n');
-            this.emitProgress(output);
+        if (plan.steps) {
+            // 각 단계별 실행
+            for (const step of plan.steps) {
+                const stepResults = await this.executeStep(step, lastStepFullOutput, output, responseNotifier);
+                agentChainResults.push(...stepResults);
+                lastStepFullOutput = stepResults.map(r => r.raw).join('\n\n---\n\n');
+                await responseNotifier.notify(output);
+            }
         }
 
         // 최종 답변 생성
@@ -62,7 +56,8 @@ export class ChainExecutor {
         output.final_user_answer = finalAnswer.final_user_answer;
         output.final_answer_summary = finalAnswer.final_answer_summary;
         output.is_complete = true;
-        this.emitProgress(output);
+
+        await responseNotifier.notify(output);
 
         // 대화 이력 업데이트
         this.history.updateHistory(userPrompt, output);
@@ -73,23 +68,25 @@ export class ChainExecutor {
     private async executeStep(
         step: AgentChainPlan['steps'][0],
         previousOutput: string,
-        agentChainLog: AgentChainLogEntry[]
+        output: FinalOutput,
+        responseNotifier: ResponseNotifier<FinalOutput>
     ): Promise<AgentResult[]> {
         log.info(`Step ${step.step} 실행`, 'SYSTEM');
         const results: AgentResult[] = [];
+        const agentsLog = output.agent_chain_log;
 
         for (const call of step.calls) {
             const result = await this.executeAgentCall(call, step.requires_context, previousOutput);
             results.push(result);
 
             // agent_chain_log에서 해당 에이전트의 summation을 업데이트
-            const agentLogIndex = agentChainLog.findIndex(log =>
-                log.agent_name === this.agentRegistry.get(call.agent_id).config.name
-                && log.reasoning === call.reasoning
+            const agentLogIndex = agentsLog.findIndex(log =>
+                log.agent_name === this.agentRegistry.get(call.agent_id).name
             );
 
             if (agentLogIndex !== -1) {
-                agentChainLog[agentLogIndex].summation = result.summation;
+                agentsLog[agentLogIndex].summation = result.summation ? result.summation : result.raw;
+                await responseNotifier.notify(output);
             }
         }
 
@@ -112,44 +109,40 @@ export class ChainExecutor {
             taskPayload.new_task += `\n\n--- 이전 단계 결과물 ---\n${previousOutput}`;
         }
 
-        return new Promise((resolve, reject) => {
+        try {
             const agent = this.agentRegistry.get(call.agent_id);
-            const timeout = 180000;
 
-            const timer = setTimeout(() => {
-                cleanup();
-                reject(new Error(`Agent ${call.agent_id} timed out after ${timeout}ms.`));
-            }, timeout);
-
-            const listener = (message: any) => {
-                if (message.type === 'task_result') {
-                    cleanup();
-                    resolve(message.payload);
-                } else if (message.type === 'task_error') {
-                    cleanup();
-                    reject(new Error(message.payload.message));
+            const result = await agent.sendPrompt(
+                {
+                    prompt: PromptFactory.taskPrompt(
+                        taskPayload.new_task,
+                        taskPayload.hub_context,
+                        previousOutput
+                    )
                 }
-            };
+            );
 
-            const cleanup = () => {
-                clearTimeout(timer);
-                agent.process.removeListener('message', listener);
+            return {
+                raw: result.raw,
+                summation: result.summation
             };
-
-            agent.process.on('message', listener);
-            agent.process.send({type: 'task', payload: taskPayload});
-        });
+        } catch (error) {
+            log.error(`에이전트 ${call.agent_id} 호출 실패`, 'SYSTEM', {error});
+            throw error;
+        }
     }
 
     private async generateFinalAnswer(userPrompt: string, results: AgentResult[]): Promise<FinalOutput> {
         log.info('최종 답변 종합 시작...', 'SYSTEM');
 
-        const finalPrompt = getFinalAnswerPrompt(userPrompt, results);
-        const finalAnswer = jsonUtils.parse<FinalOutput>(
-            await generateText(finalPrompt),
+        const finalPrompt = PromptFactory.finalAnswerPrompt(userPrompt, results);
+        const generatedText = await this.geminiClient.sendPrompt({
+            prompt: finalPrompt
+        });
+
+        return jsonUtils.parse<FinalOutput>(
+            generatedText,
             '최종 답변'
         );
-
-        return finalAnswer;
     }
 }

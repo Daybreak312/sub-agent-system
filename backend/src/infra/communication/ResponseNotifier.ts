@@ -5,9 +5,8 @@ export interface ResponseNotifier<T> {
     /**
      * 응답 데이터를 클라이언트에게 전송
      * @param data 전송할 데이터
-     * @param client 대상 클라이언트
      */
-    notify(data: T, client: Client): Promise<void>;
+    notify(data: T): Promise<void>;
 
     /**
      * 에러 알림 전송

@@ -22,6 +22,7 @@ export class GeminiAgent implements Agent {
     }
 
     async sendPrompt(props: PromptProps): Promise<AgentResult> {
+        props.prompt.withSystemPrompt(this.systemPrompt)
         const result = await this.client.sendPrompt(props);
 
         return jsonUtils.parse(result, "Parsing agent's result");

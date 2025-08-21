@@ -5,7 +5,6 @@ import {GoogleGenAI} from '@google/genai';
 import dotenv from 'dotenv';
 import log from '../../utils/Logger.js';
 import {McpClient, PromptProps} from "../McpClient.js";
-import {getTaskPrompt} from "../../utils/PromptFatory.js";
 
 let genAI: GoogleGenAI;
 
@@ -45,16 +44,11 @@ export class GeminiClient implements McpClient {
         const modelName = props.modelName ? props.modelName : "gemini-2.5-flash";
 
         try {
-            const prompt = getTaskPrompt(
-                props.systemPrompt ? props.systemPrompt : "",
-                props.prompt,
-                props.contexts?.join(",")
-            )
 
             const text = (await genAI.models.generateContent({
                 model: modelName,
                 contents: {
-                    text: prompt
+                    text: props.prompt.build()
                 }
             })).text;
 

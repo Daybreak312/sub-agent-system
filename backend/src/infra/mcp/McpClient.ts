@@ -1,4 +1,5 @@
 import {GeminiClient} from "./impl/GeminiClient.js";
+import {PromptBuilder} from "../utils/PromptFatory.js";
 
 /**
  * 프롬프트의 구성 요소.
@@ -7,26 +8,14 @@ export interface PromptProps {
     /**
      * AI에게 전달할 주요 프롬프트.
      */
-    prompt: string,
-
-    /**
-     * 이전의 대화 등 문맥에 대한 정보.
-     */
-    contexts?: string[],
-
-    /**
-     * 시스템 프롬프트.
-     *
-     * AI에게 답변 구조, 대화 형식 등 다양한 기본적인 설정을 제시하는 등 시스템적인 프롬프트.
-     */
-    systemPrompt?: string,
+    prompt: PromptBuilder;
 
     /**
      * 실제로 사용할 자세한 모델.
      *
      * 생략 시 기본적으로 설정된 모델을 사용합니다.
      */
-    modelName?: string
+    modelName?: string;
 }
 
 /**

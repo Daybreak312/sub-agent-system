@@ -94,7 +94,7 @@ export const AnswerChat: React.FC<AnswerChatProps> = ({response, isLoading = fal
                     <ErrorMessage>{currentResponse.error}</ErrorMessage>
                 ) : (
                     <>
-                        {currentResponse.agent_chain_log && currentResponse.agent_chain_log.length > 0 && (
+                        {currentResponse.agent_chain_log && (
                             <AgentChainLog
                                 log={currentResponse.agent_chain_log}
                                 reasoning={currentResponse.agent_chain_reasoning || '실행 계획이 없습니다.'} // 기본값 제공
