@@ -27,19 +27,27 @@ export const useWebSocket = () => {
         try {
             wsRef.current = new WebSocket('ws://localhost:3000');
 
+            wsRef.current.onopen = () => {
+                console.log('WebSocket 연결됨');
+            };
+
             wsRef.current.onmessage = (event) => {
                 try {
                     const message = JSON.parse(event.data) as ProgressMessage;
                     console.log('WebSocket 메시지 수신:', message);
                     setProgress(message.data);
                 } catch (error) {
-                    console.error('Failed to parse WebSocket message:', error);
+                    console.error('WebSocket 메시지 파싱 실패:', error);
                 }
             };
 
             wsRef.current.onclose = () => {
                 console.log('WebSocket disconnected, attempting to reconnect...');
                 reconnectTimeoutRef.current = window.setTimeout(connect, 3000);
+            };
+
+            wsRef.current.onerror = (error) => {
+                console.error('WebSocket 에러:', error);
             };
 
         } catch (error) {
@@ -52,5 +60,5 @@ export const useWebSocket = () => {
         return cleanup;
     }, []);
 
-    return progress;
+    return {progress, isConnected: wsRef.current?.readyState === WebSocket.OPEN};
 };

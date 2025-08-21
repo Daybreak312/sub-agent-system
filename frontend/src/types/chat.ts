@@ -3,5 +3,5 @@ export interface Message {
     content: any;
     timestamp: Date;
     isLoading?: boolean;
+    requestId?: string;  // requestId 필드 추가
 }
-

@@ -72,8 +72,8 @@ const ErrorMessage = styled.div`
 `;
 
 export const AnswerChat: React.FC<AnswerChatProps> = ({response, isLoading = false}) => {
-    const progressUpdate = useWebSocket();
-    const currentResponse = progressUpdate || response;
+    const {progress} = useWebSocket();
+    const currentResponse = progress || response;
 
     if (!currentResponse && !isLoading) return null;
 

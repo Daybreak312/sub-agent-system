@@ -45,7 +45,7 @@ app.post('/api/prompt', async (req, res, next) => {
             throw new BadRequestError(`Prompt is required.`);
         }
 
-        const requestId: string = randomUUID();
+        const requestId: string = req.header("request-id") ? req.header("request-id")! : "";
 
         const result = await mainRunner.handleUserPrompt(
             prompt,
